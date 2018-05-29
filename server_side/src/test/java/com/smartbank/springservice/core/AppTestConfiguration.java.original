@@ -1,0 +1,82 @@
+package com.smartbank.springservice.core;
+
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+import org.hibernate.ejb.HibernatePersistence;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+
+@Configuration
+@EnableTransactionManagement
+@PropertySource(value = { "classpath:application.properties" })
+@ComponentScan({ "com.smartbank.*" })
+public class AppTestConfiguration {
+
+	private static final Logger log = Logger.getLogger(AppTestConfiguration.class);
+	@Autowired
+	private Environment env;	
+	
+	@Bean
+    public JpaTransactionManager transactionManager() throws ClassNotFoundException {
+      JpaTransactionManager transactionManager = new JpaTransactionManager();
+      transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+      return transactionManager;
+    }
+		
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactory
+				.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
+		entityManagerFactory.setPersistenceUnitName("persistence");
+		entityManagerFactory.setDataSource(dataSource());
+		entityManagerFactory.setJpaProperties(additionalProperties());
+		entityManagerFactory.setPersistenceProviderClass(HibernatePersistence.class);
+		entityManagerFactory.setPackagesToScan("com.newborn.persist.entity");
+		
+		return entityManagerFactory;
+	}
+		
+	
+	@Bean
+	public DriverManagerDataSource dataSource() {
+	  DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	  try{
+		  dataSource.setDriverClassName(env.getProperty("in_memory_jdbc.driver"));
+	      dataSource.setUrl(env.getProperty("in_memory_jdbc.url"));    
+	  }catch(NullPointerException npe){
+		log.error("NullPointerException inside method additionalProperties calling properties.setProperty");  
+	  	throw new NullPointerException("NullPointerException inside method dataSource calling properties.setProperty");
+	  }      
+	  return dataSource;
+	}    
+	
+	Properties additionalProperties() {
+        Properties properties = new Properties();   
+        try{
+	       	properties.setProperty("hibernate.dialect", env.getProperty("database.dialect"));
+	        properties.setProperty("hibernate.show_sql", env.getProperty("database.show_sql"));
+	        properties.setProperty("hibernate.use_sql_comments", env.getProperty("database.use_sql_comments"));
+	        properties.setProperty("hibernate.format_sql", env.getProperty("database.format_sql"));  
+	        properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("database.auto"));
+	        properties.setProperty("hibernate.hbm2ddl.import_files", env.getProperty("database.import_files"));
+        }catch(NullPointerException npe){
+        	log.error("NullPointerException inside method additionalProperties calling properties.setProperty");
+        	throw new NullPointerException("NullPointerException inside method additionalProperties calling properties.setProperty");
+        }
+        return properties;
+    }
+	
+
+	
+}
