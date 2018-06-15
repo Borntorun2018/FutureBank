@@ -1,50 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Headers,RequestOptions, Request, RequestMethod} from '@angular/http';
-import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import {NgxPermissionsService} from 'ngx-permissions'
+import {TokenStorage} from '../../shared/token.storage';
 
 
 @Injectable()
 export class LoginService {
   private authUrl = 'http://localhost:8080/login/auth';
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  public token: string;
-   
-  constructor(private http: HttpClient) {}
-         
+  
+  constructor(private http: HttpClient, private tokenStorage: TokenStorage, private permissionsService: NgxPermissionsService) {}
+       
     login(username: string, password: string): Observable<boolean> {
-        //debugger;
+
         return this.http.post(this.authUrl, JSON.stringify({username: username, password: password}), {headers: this.headers})
                .map((response: any) => {
-//debugger;
-                         let token = response.token;
+                        let token = response.token;
                          if (token) {
-                            // set token property
-                            this.token = token;
-                           // store username and jwt token in local storage to keep user logged in between page refreshes
-                            sessionStorage.setItem('isLoggedin', JSON.stringify({ username: username, token: token })); 
-
-                            // return true to indicate successful login
+                            this.tokenStorage.setToken(token);
+                            this.tokenStorage.setUsername(username);
+                            debugger;
+                            let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
+                            console.log("roles="+perms[0].authority);
+                            //Setup the perms associated with this user 
+                            const perm = [perms[0].authority, "USER_ROLE"];
+                            this.permissionsService.loadPermissions(perm);
                             return true;
                         } else {
-//debugger;
                             // return false to indicate failed login
                             return false;
                         }
       }) 
-        
-        
-        
-        
   }
 
-    logout() {
-        // clear token remove user from local storage to log user out
-        this.token = null;
-        sessionStorage.removeItem('isLoggedin'); 
-    }
- 
+  logout() {
+    this.tokenStorage.signOut();
+  }
 
 }

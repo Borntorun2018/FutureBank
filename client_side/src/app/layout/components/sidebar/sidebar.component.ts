@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import {TokenStorage} from '../../../shared/token.storage';
 
 @Component({
     selector: 'app-sidebar',
@@ -12,7 +13,7 @@ export class SidebarComponent {
     showMenu: string = '';
     pushRightClass: string = 'push-right';
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(private translate: TranslateService, private tokenStorage: TokenStorage, public router: Router) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
@@ -61,6 +62,7 @@ export class SidebarComponent {
     }
 
     onLoggedout() {
-        sessionStorage.removeItem('isLoggedin'); // localStorage
+        this.tokenStorage.signOut();
+        //sessionStorage.removeItem('isLoggedin'); // localStorage
     }
 }

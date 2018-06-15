@@ -27,6 +27,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		if(user == null){
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
+		
+		System.out.println("*********Inside loadUserByUsername*************");
+		user.getRoles().forEach(role->System.out.println(role.getName()));
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
 	}
 

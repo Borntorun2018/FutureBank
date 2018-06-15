@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
             .subscribe(result => {
                 if (result === true) {
                     // login successful
-                    console.log("Inside login() " + sessionStorage.getItem('isLoggedin')); //sessionStorage localStorage
+                    //console.log("Inside login() " + sessionStorage.getItem('isLoggedin')); //sessionStorage localStorage
                     //debugger;
                     this.message="successfully logged in"
                     this.router.navigate(['home']);

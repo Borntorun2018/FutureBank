@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { LoggedinServiceTs } from './loggedin.service';
+import { LoggedinService } from './loggedin.service';
 import { HttpClientModule, HttpClientJsonpModule  } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
@@ -8,6 +8,6 @@ import { HttpModule } from '@angular/http';
               HttpClientJsonpModule,
                HttpModule],
     declarations: [],
-    providers: [LoggedinServiceTs]
+    providers: [LoggedinService]
 })
 export class LogggedinModule {}

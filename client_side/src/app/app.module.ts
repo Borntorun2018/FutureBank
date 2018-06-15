@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
 //import { LogggedinModule } from './loggedin/logggedin.module';  //Monday removed
-import { LoggedinServiceTs } from './security/loggedin/loggedin.service';  
+import { LoggedinService } from './security/loggedin/loggedin.service';  
 import { LoginService } from './security/login/login.service';  
 
 import { UsersModule } from './admin/users/users.module';
@@ -25,13 +25,13 @@ import { UsersModule } from './admin/users/users.module';
 import { UsersService } from './admin/users/users.service';
 import { User } from './admin/user/user';
 
+import { Interceptor } from './app.interceptor';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; //importing the module
 import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
-
-
-
+import {NgxPermissionsModule} from 'ngx-permissions';
+import {TokenStorage} from './shared/token.storage';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -48,7 +48,8 @@ export function createTranslateLoader(http: HttpClient) {
         
         HttpClientModule,
         HttpModule,
-        
+     // Specify your library as an import
+        NgxPermissionsModule.forRoot(),
         NgbModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -63,10 +64,17 @@ export function createTranslateLoader(http: HttpClient) {
         NgxPaginationModule,
        
         AppRoutingModule
+//        exports: [
+//                  SharedComponent
+//              ]
     ],
     //declarations: [AppComponent,UsersComponent],
     declarations: [AppComponent],
-    providers: [AuthGuard,LoginService,LoggedinServiceTs,UsersService,User],
+    providers: [AuthGuard,LoginService,LoggedinService,UsersService,User,TokenStorage,
+      {provide: HTTP_INTERCEPTORS,
+        useClass: Interceptor,
+        multi : true}       
+                 ],
     //providers: [AuthGuard,LogggedinModule,UsersService,User],    //monday removed
     
     

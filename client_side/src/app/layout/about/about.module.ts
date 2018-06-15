@@ -5,6 +5,8 @@ import { AboutRoutingModule } from './about-routing.module';
 import { AboutComponent } from './about.component';
 import { PageHeaderModule } from './../../shared';
 
+//import { NgxPermissionsModule } from 'ngx-permissions';
+
 @NgModule({
     imports: [CommonModule, AboutRoutingModule, PageHeaderModule],
     declarations: [AboutComponent]

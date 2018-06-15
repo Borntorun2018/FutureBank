@@ -92,9 +92,22 @@ public class AuthenticationController {
     }	 
     
         
-    /**
-    
-    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+	/**
+	 * This service would only be called if the pre filter call to JwtAuthenticationFilter validated
+	 * the users JWT
+	 * @return
+	 * @throws ServiceException
+	 */
+	@RequestMapping(value = "/currentUserJWT", method = RequestMethod.GET)
+	public ResponseEntity<SecurityUserResponse> validateCurrentLoggedInUserJWT() throws ServiceException {
+		SecurityUserResponse response = new SecurityUserResponse();
+		response.setCode(HttpStatus.OK.name());
+		response.setMessage("succ retrieved actual loggedin user");
+		return new ResponseEntity<SecurityUserResponse>(response, HttpStatus.OK); 
+    }	 
+
+	/**
+   @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
     public ResponseEntity<User> curLoggedInUser() throws AuthenticationException {
     	
     	
