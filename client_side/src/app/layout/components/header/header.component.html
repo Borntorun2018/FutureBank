@@ -1,0 +1,50 @@
+<!-- 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+-->
+<nav class="navbar navbar-expand-md navbar-dark  fixed-top">
+
+  <a class="navbar-brand" href="#">
+    <img src="assets/images/logo.png" hieght="35px" width="35px" class="user-avatar" />SmartBank
+  </a>
+ 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
+  data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault" >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+          <a class="nav-link" routerLink="">Home</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/aboutus">About Us</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" routerLink="/contactus">Contact Us</a>
+      </li>      
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/registration">Registration</a>
+      </li>
+      <li class="nav-item">
+           <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="nav-link">
+            List Users
+        </a>
+      </li>
+     </ul>
+    
+    
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <span><i class="fa fa-fw fa-user"></i>&nbsp;<span class="text_website"><font color="green">Hello {{ username }}</font> </span>/</span>
+       <a  [routerLink]="['/login']" (click)="onLoggedout()">
+            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+       </a>
+       
+ 	</form>
+    
+        
+  </div>
+</nav>
+
