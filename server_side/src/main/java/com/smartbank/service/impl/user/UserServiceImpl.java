@@ -28,13 +28,14 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
 		
-		System.out.println("*********Inside loadUserByUsername*************");
-		user.getRoles().forEach(role->System.out.println(role.getName()));
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority());
+		//System.out.println("*********Inside loadUserByUsername*************");
+		//user.getRoles().forEach(role->System.out.println(role.getName()));
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
 	}
-
-	private List<SimpleGrantedAuthority> getAuthority() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+	private List<SimpleGrantedAuthority> getAuthority(User user) {
+		ArrayList<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+		user.getRoles().forEach(role->roles.add(new SimpleGrantedAuthority(role.getName())));
+		return roles;
 	}
 
 	public List<User> findAll() {

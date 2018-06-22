@@ -1,19 +1,36 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'About Us'" ></app-page-header>
-    Get last yes
-    
  
+    <ng-template ngxPermissionsOnly="ROLE_ADMIN">
+      <div>Only users with ROLE_ADMIN can see this</div>
+    </ng-template>
+        
+     <ng-template ngxPermissionsOnly="ROLE_USER">
+      <div>Only users with ROLE_USER can see this</div>
+    </ng-template>    
  
- <ng-template ngxPermissionsOnly="ADMIN">
-    <div>Richard you can see this text congrats</div>
- </ng-template>
- 
- 
-
-
+    <div *ngxPermissionsOnly="'ROLE_ADMIN', 'ROLE_USER'">
+      <div>Only user with ROLE_ADMIN OR ROLE_USER can see this</div>
+    </div>
+         
+    <div *ngxPermissionsOnly="ROLE_ADMIN,ROLE_USER">
+      <div>Only user with ROLE_ADMIN OR ROLE_USER can see this</div>
+    </div> 
+         
+    <ng-template ngxPermissionsExcept="BAD_USER">
+     <div> Only user that do not have BAD_USER can see this</div>
+    </ng-template>      
+                
+    <ng-template ngxPermissionsOnly="SHOULD_NOT_SEE_ROLE">
+     <div> Nobody should ever ever see this</div>
+    </ng-template>       
+        
+        
     <br>
-    <button (click)="addAdminPermission()">Add Admin Permission</button>
-    <button (click)="removePermission()">Remove Admin Permission</button> 
+    <button (click)="addAdminRole()">Add Admin Role</button>
+    <button (click)="addUserRole()">Add User Role</button> 
+    <button (click)="addBadRole()">Add Bad Role</button> 
+    <button (click)="removeRoles()">Remove all Roles</button> 
     
  
 </div>

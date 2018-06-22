@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 import com.smartbank.persist.entity.user.User;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Function;
 
 import static com.smartbank.model.Constants.ACCESS_TOKEN_VALIDITY_SECONDS;
@@ -48,14 +50,10 @@ public class JwtTokenUtil implements Serializable {
     }
 
     public String generateToken(User user) {
-        return doGenerateToken(user.getUsername());
-    }
-
-    private String doGenerateToken(String subject) {
-
-        Claims claims = Jwts.claims().setSubject(subject);
-        claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-
+        Claims claims = Jwts.claims().setSubject(user.getUsername());
+        //claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
+        claims.put("scopes", getAuthority(user));
+        
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer("http://devglan.com")
@@ -64,7 +62,11 @@ public class JwtTokenUtil implements Serializable {
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .compact();
     }
-
+    private List<SimpleGrantedAuthority> getAuthority(User user) {
+		ArrayList<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
+		user.getRoles().forEach(role->roles.add(new SimpleGrantedAuthority(role.getName())));
+		return roles;
+	}
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (

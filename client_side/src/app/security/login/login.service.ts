@@ -22,14 +22,15 @@ export class LoginService {
                             this.tokenStorage.setUsername(username);
                             debugger;
                             let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
-                            console.log("roles="+perms[0].authority);
                             //Setup the perms associated with this user 
-                            const perm = [perms[0].authority, "USER_ROLE"];
-                            this.permissionsService.loadPermissions(perm);
+                            debugger;
+                            const perm = [perms[0].authority];
+                            console.log("*****Server side response back inside login() roles="+perm); //ROLE_ADMIN
+                            this.permissionsService.loadPermissions(perms);
+                            debugger
                             return true;
                         } else {
-                            // return false to indicate failed login
-                            return false;
+                             return false;
                         }
       }) 
   }

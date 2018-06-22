@@ -59,14 +59,16 @@ export class TokenStorage {
       window.sessionStorage.setItem(USER_NAME,userName); 
   }
       
-  public getUsernameAuthority(): string {
+  public getUsernameAuthority(): string[] {
       try{
         let token =  this.getToken();
         let jwtData = token.split('.')[1]
         let decodedJwtJsonData = window.atob(jwtData)
         let decodedJwtData = JSON.parse(decodedJwtJsonData)
-        let authority  = decodedJwtData.scopes[0]; 
-        return authority;        
+        debugger;
+        //let authority  = decodedJwtData.scopes[0]; 
+        //return authority;
+        return decodedJwtData.scopes;
       }
       catch(Error){
          return null; 

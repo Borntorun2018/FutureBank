@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { NgxPermissionsService } from 'ngx-permissions';
-import { Role } from './../../general/types/role.type';
+import {TokenStorage} from './../../shared/token.storage';
+
 
 @Component({
     selector: 'app-about',
@@ -11,24 +12,37 @@ import { Role } from './../../general/types/role.type';
 })
 export class AboutComponent implements OnInit {
      
- constructor(private permissionsService : NgxPermissionsService){
+ constructor(private permissionsService : NgxPermissionsService, private tokenStorage: TokenStorage){
    console.log("Inside AppComponent constructor");
    debugger;
-   permissionsService.addPermission('ADMIN');
+   let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
+   //const perm = [perms[0].authority];
+   this.permissionsService.loadPermissions(perms);
+   debugger;
  }  
 
- ngOnInit(): void{
-   this.permissionsService.addPermission('ADMIN');
+ ngOnInit(): void{}
+
+ //Temp code below
+ addAdminRole() {
+   this.permissionsService.addPermission('ROLE_ADMIN');
  }
-      
- addAdminPermission() {
-   console.log("Inside addAdminPermission setting up ADMIN");
-  this.permissionsService.addPermission('ADMIN');
+ addUserRole() {
+   this.permissionsService.addPermission('ROLE_USER');
  }
-      
- removePermission() {
-   console.log("Inside removeAdminPermission remove ADMIN");
-   this.permissionsService.removePermission('ADMIN')
+ addBadRole() {
+   this.permissionsService.addPermission('ROLE_BAD');
+ }
+ 
+ removeRoles() {
+   //this.permissionsService.removePermission('ROLE_ADMIN');
+   //this.permissionsService.removePermission('ROLE_USER');
+   //this.permissionsService.removePermission('ROLE_BAD');
+   this.permissionsService.flushPermissions();
+   
  } 
     
+ 
+ 
+ 
 }

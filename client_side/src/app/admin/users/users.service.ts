@@ -26,9 +26,10 @@ export class UsersService {
        }
       
        this.headers = new HttpHeaders({ 'Authorization': 'Bearer ' + this.token });
-      //debugger;
+      debugger;
        console.log("Inside UsersService before call to this.http.get(this.authUrl,{headers: this.headers})  this.token="+this.token);
-       return this.http.get(this.authUrl,{headers: this.headers})
+       //return this.http.get(this.authUrl,{headers: this.headers})
+       return this.http.get(this.authUrl)
        .map((response: Response) => response)
        .catch((err: Response) => {
           console.log((err.statusText || "Can't join the server."));

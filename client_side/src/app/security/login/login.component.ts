@@ -19,7 +19,6 @@ export class LoginComponent implements OnInit {
     constructor(public router: Router, public authenticationService: LoginService) {}
 
      ngOnInit() {
-        // reset login status
         this.authenticationService.logout();
     }
 
@@ -29,21 +28,13 @@ export class LoginComponent implements OnInit {
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
                 if (result === true) {
-                    // login successful
-                    //console.log("Inside login() " + sessionStorage.getItem('isLoggedin')); //sessionStorage localStorage
-                    //debugger;
                     this.message="successfully logged in"
                     this.router.navigate(['home']);
-                    //this.router.navigate(['not-found']);
                 } else {
-                    // login failed
-                    //debugger;
                     this.error = 'Username or password is incorrect';
                     this.loading = false;
                 }
             }, error => {
-              //debugger;
-              //Error occurred attempting to login to system
               this.loading = false;
               this.error = error.message;
               this.message="Error occurred attempting to login, Please try again";
