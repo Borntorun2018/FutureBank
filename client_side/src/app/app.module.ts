@@ -33,7 +33,11 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {TokenStorage} from './shared/token.storage';
 
-// AoT requires an exported function for factories
+import {ImageZoomComponent} from './shared/imagezoom/imagezoom.component';
+import { ZoomableDirective } from './shared/imagezoom/zoomable.directive.js';
+
+
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -45,11 +49,9 @@ export function createTranslateLoader(http: HttpClient) {
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        
         HttpClientModule,
         HttpModule,
-     // Specify your library as an import
-        NgxPermissionsModule.forRoot(),
+         NgxPermissionsModule.forRoot(),
         NgbModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -59,8 +61,8 @@ export function createTranslateLoader(http: HttpClient) {
             }
         }),
         
-        Ng2SearchPipeModule, //including into imports
-        Ng2OrderModule, //add here
+        Ng2SearchPipeModule, 
+        Ng2OrderModule, 
         NgxPaginationModule,
        
         AppRoutingModule
@@ -68,18 +70,12 @@ export function createTranslateLoader(http: HttpClient) {
 //                  SharedComponent
 //              ]
     ],
-    //declarations: [AppComponent,UsersComponent],
-    declarations: [AppComponent],
+    declarations: [AppComponent,ImageZoomComponent,ZoomableDirective],
     providers: [AuthGuard,LoginService,LoggedinService,UsersService,User,TokenStorage,
       {provide: HTTP_INTERCEPTORS,
         useClass: Interceptor,
         multi : true}       
                  ],
-    //providers: [AuthGuard,LogggedinModule,UsersService,User],    //monday removed
-    
-    
-    //declarations: [AppComponent],
-    //providers: [AuthGuard,LogggedinModule],
-    bootstrap: [AppComponent]
+     bootstrap: [AppComponent]
 })
 export class AppModule {}
