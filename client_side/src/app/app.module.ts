@@ -33,8 +33,8 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {TokenStorage} from './shared/token.storage';
 
-import {ImageZoomComponent} from './shared/imagezoom/imagezoom.component';
-import { ZoomableDirective } from './shared/imagezoom/zoomable.directive.js';
+//import {ImageZoomComponent} from './shared/imagezoom/imagezoom.component';
+//import { ZoomableDirective } from './shared/imagezoom/zoomable.directive.js';
 
 
 
@@ -70,7 +70,11 @@ export function createTranslateLoader(http: HttpClient) {
 //                  SharedComponent
 //              ]
     ],
-    declarations: [AppComponent,ImageZoomComponent,ZoomableDirective],
+     //declarations: [AppComponent,ZoomableDirective],
+     declarations: [AppComponent],
+     
+ 
+  //  declarations: [AppComponent,ImageZoomComponent,ZoomableDirective],
     providers: [AuthGuard,LoginService,LoggedinService,UsersService,User,TokenStorage,
       {provide: HTTP_INTERCEPTORS,
         useClass: Interceptor,
