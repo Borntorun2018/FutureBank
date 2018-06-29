@@ -1,7 +1,10 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Image Zoom'" ></app-page-header>
-    
-     <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource1' [src]='imageSource1' class='img1'>
-     <img [zoomable]='zoomOptions' [src]='imageSource2' class='img2'>
-     
+   <app-page-header [heading]="'Image Zoom'" ></app-page-header>
+   <div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+			    <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='img1'>
+			</div>
+		</div> 
+   </div>   
 </div>

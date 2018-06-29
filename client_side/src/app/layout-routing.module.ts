@@ -21,7 +21,11 @@ const routes: Routes = [
             { path: 'users', loadChildren: './admin/users/users.module#UsersModule' , canActivate: [AuthGuard] },
             { path: 'withdrawal', loadChildren: './layout/withdrawal/withdrawal.module#WithdrawalModule' , canActivate: [AuthGuard] },
                        
-            { path: 'imagezoom', loadChildren: './layout/imagezoom/imagezoom.module#ImageZoomModule' , canActivate: [AuthGuard] },
+             { path: 'imagezoom', loadChildren: './layout/imagezoom/imagezoom.module#ImageZoomModule' , canActivate: [AuthGuard] },
+             { path: 'fileupload', loadChildren: './layout/file-upload/file-upload.module#PageFileUploadModule' , canActivate: [AuthGuard] },
+            
+            
+            
             
             { path: 'aboutus', loadChildren: './layout/about/about.module#AboutModule' },
             { path: 'contactus', loadChildren: './layout/contactus/contactus.module#ContactusModule' },

@@ -18,4 +18,3 @@ import { PageHeaderModule } from './../../shared';
   bootstrap:    [ ImageZoomComponent ]
 })
 export class ImageZoomModule { }
-

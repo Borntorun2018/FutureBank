@@ -10,6 +10,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { FormsModule }    from '@angular/forms';
 
+
+
 @NgModule({
     imports: [CommonModule,
               UsersRoutingModule,
@@ -17,7 +19,7 @@ import { FormsModule }    from '@angular/forms';
               Ng2SearchPipeModule, 
               Ng2OrderModule, 
               NgxPaginationModule
-              ],
+               ],
     declarations: [UsersComponent],
     providers: [UsersService]
 })

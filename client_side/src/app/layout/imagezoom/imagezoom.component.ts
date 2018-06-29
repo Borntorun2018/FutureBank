@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-
 import { routerTransition } from '../../router.animations';
-const img1 = '/assets/images/thumbnail.jpg';
-const img2 = '/assets/images/thumbnail2.jpg';
 
-//const img1 = './../../assets/thumbnail.jpg';
-//const img2 = 'thumbnail2.jpg';
-
+const img = '/assets/images/badboy.jpg';
+const URL ='C://uploadedImages'; //Location of images
 
 @Component({
     selector: 'imagezoom-app',
@@ -15,6 +11,6 @@ const img2 = '/assets/images/thumbnail2.jpg';
     animations: [routerTransition()]
 })
 export class ImageZoomComponent {
-  imageSource1 = img1;
-  imageSource2 = img2;
+  imageSource = img;
 }
+

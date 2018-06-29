@@ -15,13 +15,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
-//import { LogggedinModule } from './loggedin/logggedin.module';  //Monday removed
+
 import { LoggedinService } from './security/loggedin/loggedin.service';  
 import { LoginService } from './security/login/login.service';  
 
 import { UsersModule } from './admin/users/users.module';
 
-//import { UsersComponent } from './admin/users/users.component';
+
 import { UsersService } from './admin/users/users.service';
 import { User } from './admin/user/user';
 
@@ -33,14 +33,24 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {NgxPermissionsModule} from 'ngx-permissions';
 import {TokenStorage} from './shared/token.storage';
 
-//import {ImageZoomComponent} from './shared/imagezoom/imagezoom.component';
-//import { ZoomableDirective } from './shared/imagezoom/zoomable.directive.js';
+//import { FileUploadModule } from 'ng2-file-upload';
+//import { FileSelectDirective } from 'ng2-file-upload';
+//import { FileUploadModule } from 'ng2-file-upload';
+
+//import { ImageZoomComponent } from './layout/imagezoom/imagezoom.module';
+
+//import { PageFileUploadComponent}   from './layout/file-upload/page-file-upload.component';
+//import { FileUploadFakeService}     from './layout/file-upload/file-upload.fake.service';
+//import { FileUploadService }        from './layout/file-upload/file-upload.service';
+
+import { ImageUploadModule } from 'angular2-image-upload';
 
 
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
+
 
 
 @NgModule({
@@ -51,7 +61,9 @@ export function createTranslateLoader(http: HttpClient) {
         FormsModule,
         HttpClientModule,
         HttpModule,
-         NgxPermissionsModule.forRoot(),
+ //       FileUploadModule,
+        ImageUploadModule.forRoot(),
+        NgxPermissionsModule.forRoot(),
         NgbModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -66,16 +78,20 @@ export function createTranslateLoader(http: HttpClient) {
         NgxPaginationModule,
        
         AppRoutingModule
-//        exports: [
-//                  SharedComponent
-//              ]
     ],
-     //declarations: [AppComponent,ZoomableDirective],
-     declarations: [AppComponent],
-     
+    // declarations: [AppComponent,FileSelectDirective],
+     declarations: [AppComponent
+                    //ImageZoomComponent,
+                    //PageFileUploadComponent
+                    ],
  
-  //  declarations: [AppComponent,ImageZoomComponent,ZoomableDirective],
-    providers: [AuthGuard,LoginService,LoggedinService,UsersService,User,TokenStorage,
+     providers: [AuthGuard,
+                 LoginService,
+                 LoggedinService,
+                 UsersService,
+                 User,
+                 TokenStorage,
+  //               {provide: FileUploadService, useClass: FileUploadFakeService },
       {provide: HTTP_INTERCEPTORS,
         useClass: Interceptor,
         multi : true}       

@@ -1,0 +1,13 @@
+<div class="container">
+   
+ <image-upload 
+  [max]="3"
+  [buttonCaption]="'Select Images!'"
+  [dropBoxMessage]="'Drop your images here!'"
+  [extensions]="['jpg','png','gif']"
+ (removed)="onRemoved($event)"
+  (uploadFinished)="onUploadFinished($event)"
+  (uploadStateChanged)="onUploadStateChanged($event)">
+</image-upload>
+  
+</div>
