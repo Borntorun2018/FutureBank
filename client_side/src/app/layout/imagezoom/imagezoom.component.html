@@ -1,10 +1,20 @@
 <div [@routerTransition]>
    <app-page-header [heading]="'Image Zoom'" ></app-page-header>
+		
+   <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='img1'>
+   
    <div class="row">
-		<div class="col-sm-12">
-			<div class="row">
-			    <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='img1'>
-			</div>
-		</div> 
-   </div>   
+	 <div class="col-sm-12">
+ 	   <image-upload 
+	  [max]="3"
+	  [buttonCaption]="'Select Images!'"
+	  [dropBoxMessage]="'Drop your images here!'"
+	  [extensions]="['jpg','png','gif']"
+	 (removed)="onRemoved($event)"
+	  (uploadFinished)="onUploadFinished($event)"
+	  (uploadStateChanged)="onUploadStateChanged($event)">
+	  </image-upload>
+	</div>
+   </div>
+   
 </div>
