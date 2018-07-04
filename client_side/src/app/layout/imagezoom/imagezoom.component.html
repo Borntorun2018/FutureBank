@@ -33,12 +33,13 @@
 	  		</div> 
   -->
   
-  
+   <!-- [beforeUpload]="onBeforeUpload" -->
   
    <div class="row">
 	 <div class="col-sm-12">
  	   <image-upload 
 	  [max]="3"
+	 [beforeUpload]="onBeforeUpload"
 	  [buttonCaption]="'Select Images!'"
 	  [dropBoxMessage]="'Drop your images here!'"
 	  [extensions]="['jpg','png','gif']"
