@@ -16,19 +16,57 @@ const URL ='C://uploadedImages'; //Location of images
 })
 export class ImageZoomComponent {
         
-      imageSource = img;
+    imageSource = img;
+    //uploadedimages: Image[] = [];
+    
+    
+  
+    
+    showImage(file: FileHolder){
+        //console.log("showImage file="+ file.src);
+    
+    
+    }
     
       onUploadFinished(file: FileHolder) {
-        console.log(file);
-      }
+          //debugger;
+          //this.uploadedimages.push(new Image(1,file.src,"temp"));
+          this.imageSource= file.src;
+       }
 
       onRemoved(file: FileHolder) {
-        console.log(file);
+         console.log("onRemoved "+ file);
       }
 
       onUploadStateChanged(state: boolean) {
-        console.log(state);
+      //console.log("onUploadStateChanged "+ file); 
       }   
     
+      onClicked(file: FileHolder) {
+        console.log("onClicked "+ file); 
+      }   
+    
+    /**
+ class Image {
+    id: number;
+    src: string;
+    name: string;
+
+    constructor(id, src,name){
+        this.id = id;
+        this.name = name;
+        this.src = src;
+    }
 }
+    **/
+
+
+
+}
+  
+
+
+
+
+
 

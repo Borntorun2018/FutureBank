@@ -37,7 +37,7 @@ export class ZoomableDirective implements OnInit {
       position: 'fixed'
     },
     zoomView: {
-      position: 'absolute',
+      position: 'fixed',  //This was originally absolute, but offset the zoom image too much, hence changed to fixed
       zIndex: '999'
     },
     settings: {
@@ -182,6 +182,8 @@ export class ZoomableDirective implements OnInit {
       top = Math.max(this.imgRect.top, mouseY - (dimensions.height / 2) - borderWidth),
       // ensure left is not outside the box
       left = Math.max(this.imgRect.left, mouseX - (dimensions.width / 2) - borderWidth);
+      
+      //console.log("Inside getPeepViewCoords top="+top+"  left="+left);
 
     // ensure both top and left will not leak from bottom or right
     return {
@@ -190,6 +192,7 @@ export class ZoomableDirective implements OnInit {
     };
   }
 
+  //this moves small box inside image that will be zoomed  
   private positionPeepView(event: MouseEvent) {
     let coords = this.getPeepViewCoords(event);
     this.renderer.setElementStyle(this.peepView, 'top', `${coords.top}px`);
@@ -197,8 +200,15 @@ export class ZoomableDirective implements OnInit {
   }
 
   private positionZoomView() {
+      //this.options.settings.gap=1;
+      //this.hoverViewPosition.left=10;
+      console.log("this.hoverViewPosition.left="+this.hoverViewPosition.left);
+       console.log("this.imgRect.width="+this.imgRect.width);
+       console.log("this.options.settings.gap="+this.options.settings.gap);
+      
     let props = Object.assign({}, this.hoverViewPosition, {
       left: this.hoverViewPosition.left + this.imgRect.width + this.options.settings.gap
+        
     });
 
     Object.keys(props)
