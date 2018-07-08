@@ -1,0 +1,25 @@
+<div [@routerTransition]>
+
+
+   <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='img1'>
+  
+  
+   <!-- [beforeUpload]="onBeforeUpload" -->
+  
+   <div class="row">
+	 <div class="col-sm-12">
+ 	   <image-upload 
+	  [max]="3"
+	 [beforeUpload]="onBeforeUpload"
+	  [buttonCaption]="'Select Images!'"
+	  [dropBoxMessage]="'Drop your images here!'"
+	  [extensions]="['jpg','png','gif']"
+	 (removed)="onRemoved($event)"
+	  (uploadFinished)="onUploadFinished($event)"
+	  (onFileUploadFinish)="imageUploaded($event)"
+	  (uploadStateChanged)="onUploadStateChanged($event)">
+	  </image-upload>
+	</div>
+   </div>
+   
+</div>

@@ -3,11 +3,14 @@ import {HttpInterceptor, HttpRequest, HttpHandler, HttpSentEvent, HttpHeaderResp
   HttpResponse, HttpUserEvent, HttpErrorResponse} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import {TokenStorage} from './shared/token.storage';
+import {TokenStorage} from './core/token.storage';
 import 'rxjs/add/operator/do';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
+/**
+ * This class is used to automatically add the token to the request, before calling the backend web services
+ */
 @Injectable()
 export class Interceptor implements HttpInterceptor {
 
@@ -16,8 +19,6 @@ export class Interceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
     let authReq = req;
-    console.log(">>>>>Inside Interceptor<<<<<");
-    
     if (this.token.getToken() != null) {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this.token.getToken())});
     }
