@@ -43,10 +43,22 @@
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"/>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      <span><i class="fa fa-fw fa-user"></i>&nbsp;<span class="text_website"><font color="green">Hello {{ username }}</font> </span>/</span>
-       <a  [routerLink]="['/login']" (click)="onLoggedout()">
-            <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
+	  
+       <a  [routerLink]="['/login']">
+           <span class="glyphicon glyphicon-log-in icon_website">Login</span>
        </a>
+       
+       <!-- 
+               <a  [routerLink]="['/logout']">
+           <span class="glyphicon glyphicon-log-in icon_website">Login</span>
+       </a>
+       -->
+       
+       
+       
+       
+       
+       
        
  	</form>
     

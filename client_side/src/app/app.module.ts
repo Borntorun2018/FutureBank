@@ -1,8 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+
+import { ImageUploadModule } from 'angular2-image-upload';
+
+
+
+
+import { Ng2SearchPipeModule } from 'ng2-search-filter'; //importing the module
+import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
+import { NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxPermissionsModule} from 'ngx-permissions';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -30,6 +45,14 @@ import { BrowserSideAuthGuard } from './services/security/browserside-auth-guard
 import { ServerSideAuthGuardService } from './services/security/serverside-authentication.service';
 import { AuthenticationService } from './services/security/authentication.service';
 
+
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +73,19 @@ import { AuthenticationService } from './services/security/authentication.servic
   imports: [
     BrowserModule,
     HttpClientModule,
+    Ng2SearchPipeModule, 
+    Ng2OrderModule, 
+    NgxPaginationModule,
+    ImageUploadModule.forRoot(),
+    NgxPermissionsModule.forRoot(),
+    NgbModule.forRoot(),
+    TranslateModule.forRoot({
+        loader: {
+            provide: TranslateLoader,
+            useFactory: createTranslateLoader,
+            deps: [HttpClient]
+        }
+    }),
     RouterModule.forRoot(
     appRoutes 
     ),

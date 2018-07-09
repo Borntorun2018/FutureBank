@@ -1,5 +1,9 @@
+<!-- 
 <div [@routerTransition]>
+
     <app-page-header [heading]="'About Us'" ></app-page-header>
+ -->
+ 
  
     <ng-template ngxPermissionsOnly="ROLE_ADMIN">
       <div>Only users with ROLE_ADMIN can see this</div>
@@ -24,7 +28,7 @@
     <ng-template ngxPermissionsOnly="SHOULD_NOT_SEE_ROLE">
      <div> Nobody should ever ever see this</div>
     </ng-template>       
-        
+   
         
     <br>
     <button (click)="addAdminRole()">Add Admin Role</button>
@@ -32,5 +36,6 @@
     <button (click)="addBadRole()">Add Bad Role</button> 
     <button (click)="removeRoles()">Remove all Roles</button> 
     
- 
+ <!-- 
 </div>
+-->
