@@ -24,6 +24,7 @@ import { AboutComponent } from './components/about/about.component';
 import { AccessDeniedComponent } from "./components/access-denied/access-denied.component";
 
 
+import { LayoutComponent } from './components/layout/layout.component';
 import { UsersComponent } from "./components/admin/users.component";
 
 import { ContactusComponent } from "./components/contactus/contactus.component";
@@ -58,6 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     AboutComponent,
     AccessDeniedComponent,
+    LayoutComponent,
     UsersComponent,
     ContactusComponent,
     HomeComponent,
