@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 
 import { ImageUploadModule } from 'angular2-image-upload';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -72,6 +72,7 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     Ng2SearchPipeModule, 
     Ng2OrderModule, 
