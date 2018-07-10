@@ -25,7 +25,7 @@ export class ProductDetailComponent {
     imageUploaded(file: FileHolder) {
         debugger;
         console.log(event);
-        imageSource=file.src;
+        this.imageSource=file.src;
         //this.uploadedimages.push(new Image(1,file.src,"temp"));
         //this.file.push(event.file);
         //console.log(this.file);
@@ -62,7 +62,7 @@ export class ProductDetailComponent {
     console.log(this.file);
     
     **/
-    
+    this.imageSource="";
          console.log("onRemoved "+ file);
       }
 

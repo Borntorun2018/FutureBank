@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-//import { UsersService } from './../../services/admin/users/users.service';
-//import { User }         from './../../services/admin/users/user';
+import { UsersService } from './../../services/admin/users/users.service';
+import { User }         from './../../services/admin/users/user';
 import { Http ,HttpModule} from '@angular/http';
 //import { routerTransition } from './../../router.animations';
 
@@ -12,9 +12,7 @@ import { Http ,HttpModule} from '@angular/http';
 })
 export class UsersComponent implements OnInit {
         
-     ngOnInit() {}
-    
-        /**
+           
     users: User[];
     loading = false;
     error: any;
@@ -31,7 +29,7 @@ export class UsersComponent implements OnInit {
      ngOnInit() {
           this.loading = true;
          this.message = "Please wait - loading data";
-         this.usersService.allUsers()
+         this.usersService.getAllUsers()
              .subscribe(users => {
                  this.users=<User[]>users;
                 console.log('user details: ' + this.users[0].username);
@@ -58,6 +56,6 @@ export class UsersComponent implements OnInit {
      public editUser(id:any):void{
          console.log('Inside editUser id: ' + id);
      }
-    **/
+    
      
 }
