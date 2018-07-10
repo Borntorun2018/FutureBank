@@ -15,33 +15,24 @@ import { PageNotFoundComponent } from "./components/page-not-found/page-not-foun
 import { BrowserSideAuthGuard } from "./services/security/browserside-auth-guard.service";
 
 export const appRoutes: Routes = [
-                                  
-                                  
-                                  
-                                  {path: '', component: LayoutComponent,
+                                   {path: '', component: LayoutComponent,
                                       children: [
-                                            { path: 'aboutus', component: AboutComponent }
-                                           
-                                           
+                                            { path: 'home', component: HomeComponent },
+                                            { path: 'login',  component: LoginComponent },   
+                                            { path: 'aboutus', component: AboutComponent },
+                                            { path: 'contactus',component: ContactusComponent },
+                                            { path: 'registration', component: RegistrationComponent },
+                                            { path: 'users', component: UsersComponent },
+                                            
+                                            { path: 'logout', component: LogoutComponent},
+                                            { path: 'not-found', component: PageNotFoundComponent },
+                                            { path: 'product', component: ProductDetailComponent},
+                                            { path: 'profile', component: ProfileComponent, canActivate: [BrowserSideAuthGuard]},
+                                            { path: 'access-denied', component: AccessDeniedComponent },
+                                            { path: '',   redirectTo: '/home', pathMatch: 'full' },   
+                                            { path: '**', component: PageNotFoundComponent }
                                       ],
                                   },                              
-                                 
-                                  
-                                   { path: 'login',  component: LoginComponent },
-                                  { path: 'logout', component: LogoutComponent, canActivate: [BrowserSideAuthGuard]},
-                                  { path: 'home', component: HomeComponent },
-                                  //{ path: 'aboutus', component: AboutComponent },
-                                  { path: 'access-denied', component: AccessDeniedComponent },
-                                  { path: 'users', component: UsersComponent , canActivate: [BrowserSideAuthGuard]},
-                                  { path: 'contactus',component: ContactusComponent },
-                                  { path: 'not-found', component: PageNotFoundComponent },
-                                  { path: 'product', component: ProductDetailComponent, canActivate: [BrowserSideAuthGuard]},
-                                  { path: 'profile', component: ProfileComponent, canActivate: [BrowserSideAuthGuard]},
-                                  { path: 'registration', component: RegistrationComponent },
-                                  { path: '',   redirectTo: '/home', pathMatch: 'full' },
-                                  { path: '**', component: PageNotFoundComponent }
+                                 // { path: '',   redirectTo: '/home', pathMatch: 'full' }
                               ];
-
-
-
     

@@ -5,7 +5,7 @@ import { FileHolder,UploadMetadata} from 'angular2-image-upload';
 
 //https://aberezkin.github.io/ng2-image-upload/#/readme
 //https://www.npmjs.com/package/ng2-fancy-image-uploader
-const img = '/assets/images/badboy.jpg';
+const img = '/assets/images/badboy.jpg';  //default
 const URL ='C://uploadedImages'; //Location of images
 
 @Component({
@@ -16,13 +16,16 @@ const URL ='C://uploadedImages'; //Location of images
 })
 export class ProductDetailComponent {
         
+    dubugger;
     imageSource = img;
     uploadedimages: Image[] = [];
       
-    
-    imageUploaded(event:any) {
+ 
+    //imageUploaded(event:any) {
+    imageUploaded(file: FileHolder) {
         debugger;
         console.log(event);
+        imageSource=file.src;
         //this.uploadedimages.push(new Image(1,file.src,"temp"));
         //this.file.push(event.file);
         //console.log(this.file);
@@ -40,11 +43,11 @@ export class ProductDetailComponent {
     showImage(file: FileHolder){
     }
     
-      //onUploadFinished(file: FileHolder) {
-       onUploadFinished(event:any) {  
+      onUploadFinished(file: FileHolder) {
+      
           debugger;
           //this.uploadedimages.push(new Image(1,file.src,"temp"));
-          //this.imageSource= file.src;
+          this.imageSource= file.src;
        }
 
       onRemoved(file: FileHolder) {

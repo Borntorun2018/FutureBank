@@ -47,6 +47,11 @@ import { ServerSideAuthGuardService } from './services/security/serverside-authe
 import { AuthenticationService } from './services/security/authentication.service';
 
 
+import { ZoomableDirective }  from './components/product/zoomable.directive.js';
+
+
+
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -70,7 +75,8 @@ export function createTranslateLoader(http: HttpClient) {
     ProductDetailComponent,
     RegistrationComponent,
     TopNavBarComponent,
-    SideNavBarComponent
+    SideNavBarComponent,
+    ZoomableDirective
   ],
   imports: [
     BrowserModule,
