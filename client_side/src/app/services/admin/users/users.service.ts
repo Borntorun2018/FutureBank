@@ -15,6 +15,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
     
   getAllUsers(): Observable<Object> {
+      debugger;
        return this.http.get(this.userUrl)
                        .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -24,6 +25,7 @@ export class UsersService {
   }
     
   getUser(username: string): Observable<Object> {
+      debugger;
       return this.http.post(this.userUrl, JSON.stringify({username: username}), {headers: this.headers})
                         .map((response: Response) => response)
                        .catch((err: Response) => {

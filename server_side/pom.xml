@@ -27,17 +27,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        
-        <dependency>
+ 	    <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-        
-        
-        
-        
-        
+		</dependency>       
         
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -65,13 +59,22 @@
         </dependency>
         
         
-        
-       	<!-- Added spring data rest core support -->
+            	<!-- Added spring data rest core support -->
 		<dependency>
     		<groupId>org.springframework.data</groupId>
     		<artifactId>spring-data-rest-core</artifactId>
     		<version>2.5.1.RELEASE</version>
 		</dependency>
+		
+		
+		     <dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.8.4</version>
+		    <scope>test</scope>
+        </dependency>
+		
+		
 		
 		<!-- Added spring data rest webmvc support -->
 		<!-- 
@@ -83,23 +86,8 @@
 			-->		 
         
         
-        <dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.8.4</version>
-		    <scope>test</scope>
-        </dependency>
         
     </dependencies>
-
-
-	
-
-
-
-
-
-
 
     <properties>
         <java.version>1.8</java.version>
@@ -108,6 +96,29 @@
 
     <build>
         <plugins>
+        
+ <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-dependency-plugin</artifactId>
+    <executions>
+      <execution>
+        <id>copy-dependencies</id>
+        <phase>package</phase>
+        <goals>
+          <goal>copy-dependencies</goal>
+        </goals>
+        <configuration>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+          <overWriteReleases>false</overWriteReleases>
+          <overWriteSnapshots>true</overWriteSnapshots>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>       
+        
+        
+        
+        
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

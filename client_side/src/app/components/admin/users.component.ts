@@ -8,36 +8,48 @@ import { Http ,HttpModule} from '@angular/http';
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
-    styleUrls: ['./users.component.scss']
+    styleUrls: ['./users.component.scss'],
+    providers: [ UsersService ]
 })
 export class UsersComponent implements OnInit {
         
-           
     users: User[];
+     
     loading = false;
+    
     error: any;
     message: any;
+    status: any;
     
     currentPage: any;
-    
- 
+     
     key: string = 'ID'; 
-    reverse: boolean = false;
-    p: number = 1;
     
-     constructor(public router: Router, public usersService : UsersService) {}
+    reverse: boolean = false;
+    
+    p: number = 1;  //not sure if this is used
+    
+     constructor(public router: Router, 
+                 public usersService : UsersService) {}
      ngOnInit() {
           this.loading = true;
          this.message = "Please wait - loading data";
          this.usersService.getAllUsers()
              .subscribe(users => {
+                 debugger;
                  this.users=<User[]>users;
-                console.log('user details: ' + this.users[0].username);
+                 this.status == 'Succes';
+                 console.log('user details: ' + this.users[0].username);
               }, error => {
+                  debugger;
                  this.loading = false;
-                 this.error = error;
+                 this.error = error.message;
+                 this.status == 'Error';
+                 
               });
      }
+     
+    
           
      public sort(key){
          this.key = key;
@@ -56,6 +68,6 @@ export class UsersComponent implements OnInit {
      public editUser(id:any):void{
          console.log('Inside editUser id: ' + id);
      }
-    
+   
      
 }

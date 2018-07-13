@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     error: any;
     message: any
+    status: any;
 
     constructor(public router: Router, public authenticationService: AuthenticationService) {}
 
@@ -29,15 +30,18 @@ export class LoginComponent implements OnInit {
             .subscribe(result => {
                 if (result === true) {
                     this.message="successfully logged in"
+                    this.status = 'Succes';   
                     this.router.navigate(['home']);
                 } else {
                     this.error = 'Username or password is incorrect';
                     this.loading = false;
+                    this.status  = 'Error'; 
                 }
             }, error => {
               this.loading = false;
               this.error = error.message;
               this.message="Error occurred attempting to login, Please try again";
+              this.status  = 'Error'; 
             });
     }
   

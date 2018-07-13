@@ -1,4 +1,4 @@
-
+<!-- 
     <div class="row justify-content-md-center">
         <div class="col-md-6">
         
@@ -6,20 +6,25 @@
             <h1>Smart Bank Login</h1>
             
 		     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+		     
+		     
 		        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
 		            <label for="username">Username</label>
 		            <input id="username" type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
 		            <span *ngIf="f.submitted && !username.valid" class="help-block">Username is required</span>
 		        </div>
+		        
 		        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
 		            <label for="password">Password&nbsp;</label>
 		            <input id="password" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
 		            <span *ngIf="f.submitted && !password.valid" class="help-block">Password is required</span>
 		        </div>
+		        
 		        <div class="form-group">
 		            <button [disabled]="loading" class="btn btn-primary">Login</button>
 		            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
 		        </div>
+		        
 		        <div *ngIf="message" class="alert alert-error">
 		          {{message}}<br><font color="red">{{error}}</font>
 		        </div>
@@ -27,4 +32,99 @@
             
         </div>
     </div>
+    -->
+    
+    
+ <div class="bg-extended">
+     <div class="row justify-content-md-center">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+ 			         <div class="row">
+ 			         
+                        <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                       
+                          <div class="row">
+                            <div class="col-sm-12">
+                              <div class="form-group label-floating">
+                                  <h1 style="color:black;">USER LOGIN</h1>
+                              </div>  
+                            </div>
+                          </div>
+
+						  <div class="row">
+							  <div class="col-sm-12">
+							     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+							       <label for="username" class="cols-sm-2 control-label">Username</label>
+							       <div class="cols-sm-10">
+							        <div class="input-group">
+							         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							         <input type="text" class="form-control"  [(ngModel)]="model.username" name="username" id="username"  placeholder="Enter your Username" #username="ngModel" required />
+                                     <span *ngIf="f.submitted && !username.valid" class="help-block">Username is required</span>
+							        </div>
+							       </div>
+							    </div>
+							  </div>
+						  </div>
+
+						 <div class="row">
+						   <div class="col-sm-12">
+						    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+						       <label for="password" class="cols-sm-2 control-label">Password</label>
+						       <div class="cols-sm-10">
+						        <div class="input-group">
+						          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						          <input type="password" class="form-control" [(ngModel)]="model.password" name="password" id="password"  placeholder="Enter your Password"  #password="ngModel" required/>
+                                  <span *ngIf="f.submitted && !password.valid" class="help-block">Password is required</span>
+					           </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						
+                        <div class="row">
+                          <div class="col-sm-12">
+							  <div class="form-group">
+								<button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+							    <a href="#/forgotPassword"><i class="fa fa-shield"></i>Forgot Password</a>
+							  </div>
+						  </div>
+						</div>
+						
+					</form>
+					
+			      </div>
+                </div> 
+              </div> <!-- <div class="row"> -->
+              
+              <br/>
+              
+             <div class="row">
+               <div class="col-sm-3"></div>
+               <div class="col-sm-6">
+		 		  <div class="control-group">
+				      <div class="cols-sm-12">
+				          <div ng-if="status == 'Succes'">
+					          <div class="alert alert-success fade in">
+		  							<strong>Success!</strong> {{message}}
+							  </div>
+						  </div>
+		                  <div ng-if="status == 'Error'">					          
+							 <div class="alert alert-danger fade in">
+					           <strong>Error!</strong> {{message}}
+					         </div>			          
+				          </div>
+				      </div>
+		          </div>			
+  			   
+  			   
+  			   </div>  
+  			   <div class="col-sm-3" ></div>    
+            </div>
+             
+        </div> <!-- <div class="container"> -->
+
+    </div> <!--    <div class="align-vertical-center">     -->
+</div> <!--  <div class="bg-extended">    -->   
 
