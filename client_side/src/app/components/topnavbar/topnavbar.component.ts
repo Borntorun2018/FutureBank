@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPermissionsService } from 'ngx-permissions';
+import {TokenStorage} from './../../core/token.storage';
 
 @Component({
     selector: 'app-navbar',
@@ -13,8 +15,14 @@ export class TopNavBarComponent implements OnInit {
     pushRightClass: string = 'push-right';
     username: string ='anonymous';
     loading = true;
-    constructor(private translate: TranslateService, public router: Router) {
-         
+    constructor(private permissionsService : NgxPermissionsService,
+                private translate: TranslateService, 
+                private tokenStorage: TokenStorage,
+                public router: Router) {
+        debugger;
+         let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
+   //const perm = [perms[0].authority];
+   this.permissionsService.loadPermissions(perms);
         let currentuser = JSON.parse(sessionStorage.getItem('isLoggedin')); 
         
         if (currentuser !== null) {

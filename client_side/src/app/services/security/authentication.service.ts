@@ -5,17 +5,10 @@ import { JwtHelper } from 'angular2-jwt';
 import {NgxPermissionsService} from 'ngx-permissions';
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
-//import { HttpRequest } from './request';
-//import { HttpEvent } from './response';
-
 
 @Injectable()
 export class AuthenticationService {
-
-  //private authUrl = '/api/login';
   private authUrl = 'http://localhost:8080/login/auth';
-  
-  
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -30,15 +23,15 @@ export class AuthenticationService {
       
       
     return this.http.post(this.authUrl, credentials, {headers: this.headers})
-         //.do(response => { 
-         .map((response: any) => {  
+          .map((response: any) => {  
           let token = response.token;
           if (token) {
                 this.token.saveToken(token);
-                let perms: [any]=[this.token.getUsernameAuthority()];
-                const perm = [perms[0].authority];
-                this.permissionsService.loadPermissions(perms);
-            return true;
+                let perms: any=this.token.getUsernameAuthority();
+                for(let i=0; i<perms.length; i++){
+                   this.permissionsService.addPermission(perms[i].authority);  
+                 }
+             return true;
           } else {
             return false;
           }    
@@ -47,7 +40,7 @@ export class AuthenticationService {
       }); 
    }
 
-     //Spring security will handle the backen logout
+  //Spring security will handle the backen logout
   public logout(): Observable<boolean> {
       return this.http.post(this.authUrl,{headers: this.headers})
                  .map((response: any) => {
@@ -57,7 +50,6 @@ export class AuthenticationService {
     }
     
   public isAuthenticated(): boolean {
-    // console.log('token', this.jwtHelper.decodeToken(this.token.getToken()));
     if(this.token.getToken()==null)
       return false;
     else

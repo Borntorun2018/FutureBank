@@ -24,10 +24,11 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        //debugger;
+        debugger;
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
+                debugger;
                 if (result === true) {
                     this.message="successfully logged in"
                     this.status = 'Succes';   
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
                     this.status  = 'Error'; 
                 }
             }, error => {
+               debugger; 
               this.loading = false;
               this.error = error.message;
               this.message="Error occurred attempting to login, Please try again";
