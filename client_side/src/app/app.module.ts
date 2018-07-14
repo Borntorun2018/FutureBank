@@ -49,7 +49,7 @@ import { AuthenticationService } from './services/security/authentication.servic
 
 import { ZoomableDirective }  from './components/product/zoomable.directive.js';
 
-
+import { TokenInterceptor  } from './app.interceptor';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -100,11 +100,17 @@ export function createTranslateLoader(http: HttpClient) {
     ),
     FormsModule
   ],
+      
   providers: [
     AuthenticationService,
     TokenStorage,
     BrowserSideAuthGuard,
-    ServerSideAuthGuardService
+    ServerSideAuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+     }
   ],
   bootstrap: [AppComponent]
 })
