@@ -23,6 +23,8 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/registration">Registration</a>
       </li>
+      
+      
        <li class="nav-item">
            <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="nav-link">
             List Users
@@ -39,13 +41,17 @@
 		    </a>
 		</div>
 	    <div *ngxPermissionsOnly="['ROLE_ADMIN', 'ROLE_USER']">
-	     <a  [routerLink]="['/logout']">
+            <i class="fa fa-user icon_website">
+              <span class="text_website">Hello: {{username}}</span>
+            </i>
+            <a  [routerLink]="['/logout']">
 	           <span class="glyphicon glyphicon-log-out icon_website">Logout</span>
-         </a>
+            </a>
 	    </div>
  	</form>
     
         
   </div>
 </nav>
+
 

@@ -1,0 +1,119 @@
+/*
+Credits:
+https://github.com/marcaube/bootstrap-magnify
+*/
+
+.mag {
+    width:200px;
+    margin: 0 auto;
+    float: none;
+}
+    
+.mag img {
+    max-width: 100%;
+}
+        
+  
+
+.magnify {
+    position: relative;
+    cursor: none
+}
+
+.magnify-large {
+    position: absolute;
+    display: none;
+    width: 175px;
+    height: 175px;
+
+    -webkit-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+       -moz-box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85), 0 0 7px 7px rgba(0, 0, 0, 0.25), inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+    
+    -webkit-border-radius: 100%;
+       -moz-border-radius: 100%;
+             border-radius: 100%
+}
+
+
+
+.text_headings_website {
+  color: #c2f5d3;  
+  font-weight: bold;
+  font-size:18px;
+}
+.text_headings_website_medium {
+  color: #c2f5d3;  
+  font-weight: bold;
+  font-size:12px;
+}
+.text_headings_website_small {
+  color: #c2f5d3;  
+  font-weight: bold;
+  font-size:6px;
+}
+
+
+
+
+.text_website {
+  color: #c2f5d3;  
+  font-weight: bold;
+}
+.icon_website {
+ color: #76D7C4;
+ aria-hidden: true
+}
+
+.buttonSearch_website {
+  font-size: 17px; 
+  color: black; 
+  font-weight: bold; 
+  background-color: #657E10;  
+  border: none;
+}
+
+.buttonClearSearch_website {
+  font-size:17px; 
+  color: black; 
+  font-weight: bold; 
+  background-color: #c2f5d3;  
+  border: none;
+}
+
+.nowrap_website { white-space: nowrap; }
+
+
+/*
+  This is the colour used to display the background wen the user has entered a tick in a checkbox
+*/
+md-checkbox.md-checked.green .md-icon {
+ background-color: #657E10;
+}
+
+/*
+ This is the default colour used to display the background wen the user has not entered a tick box in a checkbox
+*/
+md-checkbox .md-container:before {
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    display: block;
+    height: auto;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    width: auto;
+}
+
+
+md-radio-button.md-default-theme .md-on, md-radio-button .md-on {
+    background-color:  #657E10;
+}
+
+
