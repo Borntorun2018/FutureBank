@@ -11,7 +11,7 @@
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group label-floating">
-                                  <h1 style="color:black;">User Login</h1>
+                                  <h1 style="color:black;">eBusiness user login</h1>
                               </div>  
                             </div>
                           </div>
@@ -64,26 +64,20 @@
               <br/>
               
              <div class="row">
-               <div class="col-sm-3"></div>
-               <div class="col-sm-6">
-		 		  <div class="control-group">
+ 		 		  <div class="control-group">
 				      <div class="cols-sm-12">
-				          <div ng-if="status == 'Succes'">
-					          <div class="alert alert-success fade in">
-		  							<strong>Success!</strong> {{message}}
+				          <div *ngIf="status === 'Succes'">
+				              <div class="alert alert-success">
+		  						<strong>Success!</strong> {{message}}
 							  </div>
 						  </div>
-		                  <div ng-if="status == 'Error'">					          
-							 <div class="alert alert-danger fade in">
+		                  <div *ngIf="status === 'Error'">	
+		                  	 <div class="alert alert-danger">
 					           <strong>Error!</strong> {{message}}
 					         </div>			          
 				          </div>
 				      </div>
 		          </div>			
-  			   
-  			   
-  			   </div>  
-  			   <div class="col-sm-3" ></div>    
             </div>
              
         </div> <!-- <div class="container"> -->

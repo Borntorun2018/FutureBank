@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.smartbank</groupId>
+    <groupId>com.eBusiness</groupId>
     <artifactId>spring-boot-jwt-auth</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -38,54 +38,37 @@
             <artifactId>jjwt</artifactId>
             <version>0.6.0</version>
         </dependency>
-
-<!-- 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-    -->    
-     <!--  Adding internal spring boot database -->
-<dependency>
-    <groupId>com.h2database</groupId>
-    <artifactId>h2</artifactId>
-    <version>1.4.191</version>
-    <scope>runtime</scope>
-</dependency>   
+     
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.191</version>
+		    <scope>runtime</scope>
+		</dependency>   
         
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
         </dependency>
-        
-        
-            	<!-- Added spring data rest core support -->
+
 		<dependency>
     		<groupId>org.springframework.data</groupId>
     		<artifactId>spring-data-rest-core</artifactId>
     		<version>2.5.1.RELEASE</version>
 		</dependency>
-		
-		
-		     <dependency>
+
+		<dependency>
 		    <groupId>org.mockito</groupId>
 		    <artifactId>mockito-all</artifactId>
 		    <version>1.8.4</version>
 		    <scope>test</scope>
         </dependency>
 		
-		
-		
-		<!-- Added spring data rest webmvc support -->
-		<!-- 
 		<dependency>
-		    <groupId>org.springframework.data</groupId>
-		    <artifactId>spring-data-rest-webmvc</artifactId>
-		    <version>2.5.1.RELEASE</version>
-		</dependency>		
-			-->		 
-        
-        
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <scope>test</scope>
+        </dependency>
         
     </dependencies>
 

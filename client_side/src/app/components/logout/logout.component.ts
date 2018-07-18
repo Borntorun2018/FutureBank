@@ -7,8 +7,7 @@ import { AuthenticationService } from './../../services/security/authentication.
 
 @Component({
     selector: 'app-logout',
-    templateUrl: './logout.component.html',
-    styleUrls: ['./logout.component.scss'],
+    template:'',
     animations: [routerTransition()]
 })
 export class LogoutComponent implements OnInit {
@@ -20,11 +19,12 @@ export class LogoutComponent implements OnInit {
     constructor(public router: Router, public authenticationService: AuthenticationService) {}
 
      ngOnInit() {
-        this.authenticationService.logout();
+         debugger;
+        this.logout(); 
     }
 
     logout() {
-        //debugger;
+        debugger;
         this.loading = true;
         this.authenticationService.logout()
             .subscribe(result => {

@@ -30,12 +30,15 @@ export class LoginComponent implements OnInit {
             .subscribe(result => {
                 debugger;
                 if (result === true) {
-                    this.message="successfully logged in"
+                    debugger;
+                    this.message="Successfully logged in"
                     this.status = 'Succes';   
                     this.router.navigate(['home']);
                 } else {
-                    this.error = 'Username or password is incorrect';
+                    debugger;
+                    this.message = 'Username or password is incorrect';
                     this.loading = false;
+                    this.error='';
                     this.status  = 'Error'; 
                 }
             }, error => {
