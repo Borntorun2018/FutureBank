@@ -1,7 +1,5 @@
 package com.eBusiness.controller;
 
-
-
 import com.eBusiness.config.JwtTokenUtil;
 import com.eBusiness.exceptions.ServiceException;
 import com.eBusiness.model.AuthToken;
@@ -11,25 +9,30 @@ import com.eBusiness.persist.entity.user.User;
 import com.eBusiness.security.SecurityUser;
 import com.eBusiness.service.user.UserService;
 
+import com.eBusiness.exceptions.AuthenticationException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/login")
 public class AuthenticationController {
 
     @Autowired
@@ -39,30 +42,35 @@ public class AuthenticationController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private UserService userService;
-
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody LoginUser loginUser) throws AuthenticationException {
-
+    private UserDetailsService userDetailsService;
+ 
+    @RequestMapping(value = "/login/auth", method = RequestMethod.POST)
+    public ResponseEntity<?> login(@RequestBody LoginUser loginUser) throws AuthenticationException {
     	System.out.println("Inside register login user "+loginUser.getUsername());
-        final Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginUser.getUsername(),
-                        loginUser.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        final User user = userService.findOne(loginUser.getUsername());
-        final String token = jwtTokenUtil.generateToken(user);
+    	authenticate(loginUser.getUsername(), loginUser.getPassword());
+     	final UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getUsername());
+        final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthToken(token));
        
     }
+  
+       
+    @RequestMapping(value = "/logout/auth", method = RequestMethod.POST)
+    public ResponseEntity<String> logout(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    	Optional<Authentication> auth=	Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication());
+    	if (auth.isPresent()) {
+    		SecurityContextHolder.getContext().setAuthentication(null);
+    	    return new ResponseEntity("User successfully logged out",HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity("User unSuccessfully logged out",HttpStatus.EXPECTATION_FAILED);
+    	}
+    }
     
-    
-    
+    //**** THIS IS CURRENTLY NOT USED
     
 	//Get the current actual logged in user
     //=====================================
+    /**
 	@RequestMapping(value = "/currentUser", method = RequestMethod.GET)
 	public ResponseEntity<SecurityUserResponse> currentActualLoggedInUser() throws ServiceException {
 		SecurityUserResponse response = new SecurityUserResponse();
@@ -83,14 +91,12 @@ public class AuthenticationController {
 		  }
 
 		}catch(Exception e){
-			 //log.error(propertyService.getPropertyValue("error.attempting.retrieve.actual.logged.in.user"),e.getCause());
 			 throw new ServiceException("error system failure during attempting to retrieve actual logged in user",e);					 
 		}
 		
-		//log.debug(propertyService.getPropertyValue("info.succ.retrieved.actual.logged.in.user"));	
-		//log.debug(propertyService.getPropertyValue("info.exit.restful.userManagerController.currentActualLoggedInUser"));
 		return new ResponseEntity<SecurityUserResponse>(response, HttpStatus.OK); 
-    }	 
+    }
+    **/	 
     
         
 	/**
@@ -106,6 +112,17 @@ public class AuthenticationController {
 		response.setMessage("succ retrieved actual loggedin user");
 		return new ResponseEntity<SecurityUserResponse>(response, HttpStatus.OK); 
     }	 
+    private void authenticate(String username, String password) {
+    	Objects.requireNonNull(username);
+    	Objects.requireNonNull(password);
+    	try {
+    		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,password));
+    	}catch(DisabledException e) {
+    		throw new AuthenticationException("User is disacbled",e);
+    	}catch(BadCredentialsException e) {
+    		throw new AuthenticationException("Bad credentials!",e);
+    	}
+    }
 
 	/**
    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)

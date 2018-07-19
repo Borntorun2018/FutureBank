@@ -23,7 +23,7 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Resource(name = "userService")
+    @Resource(name = "userDetailsService")
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -69,9 +69,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                  .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                  .anyRequest().authenticated();
                  
+                 
+                 
+                 
                  // Custom JWT based security filter
                  http
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+                
+                
                  
               // disable page caching
                  http.headers().cacheControl();

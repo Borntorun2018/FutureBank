@@ -1,7 +1,10 @@
 package com.eBusiness.model;
 
-public class LoginUser {
+import java.io.Serializable;
 
+public class LoginUser implements Serializable{
+
+	private static final long serialVersionUID = -8445943548965154774L;
     private String username;
     private String password;
 

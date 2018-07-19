@@ -8,7 +8,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthenticationService {
-  private authUrl = 'http://localhost:8080/login/auth';
+  private loginUrl = 'http://localhost:8080/login/auth';
+  private logoutUrl ='http://localhost:8080/logout/auth';
+    
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   jwtHelper: JwtHelper = new JwtHelper();
 
@@ -22,7 +24,7 @@ export class AuthenticationService {
     const credentials = {username: username, password: password};
       
       
-    return this.http.post(this.authUrl, credentials, {headers: this.headers})
+    return this.http.post(this.loginUrl, credentials, {headers: this.headers})
           .map((response: any) => {  
           let token = response.token;
           if (token) {
@@ -42,7 +44,7 @@ export class AuthenticationService {
 
   //Spring security will handle the backen logout
   public logout(): Observable<boolean> {
-      return this.http.post(this.authUrl,{headers: this.headers})
+      return this.http.post(this.logoutUrl,{headers: this.headers})
                  .map((response: any) => {
                      this.token.signOut();
                      return true;
