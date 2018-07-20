@@ -4,39 +4,17 @@ import com.eBusiness.dao.UserDao;
 import com.eBusiness.persist.entity.user.User;
 import com.eBusiness.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
-@Service(value = "userDetailsService")   //THURSDAY CHANGE userService
-public class UserServiceImpl implements UserDetailsService, UserService {
-	
+@Service(value = "userService")   
+public class UserServiceImpl implements UserService {
+
 	@Autowired
 	private UserDao userDao;
-
-	@Override
-	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-		User user = userDao.findByUsername(userId);
-		if(user == null){
-			throw new UsernameNotFoundException("Invalid username or password.");
-		}
-		
-		//System.out.println("*********Inside loadUserByUsername*************");
-		//user.getRoles().forEach(role->System.out.println(role.getName()));
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthority(user));
-	}
-	private List<SimpleGrantedAuthority> getAuthority(User user) {
-		ArrayList<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		user.getRoles().forEach(role->roles.add(new SimpleGrantedAuthority(role.getName())));
-		return roles;
-	}
 
 	public List<User> findAll() {
 		List<User> list = new ArrayList<>();

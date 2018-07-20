@@ -2,9 +2,6 @@ package com.eBusiness.security;
 
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
-//import org.springframework.security.core.userdetails.UserDetails;
-
-//import com.eBusiness.persist.entity.user.User;
 
 
 /**
@@ -13,7 +10,7 @@ import org.springframework.security.core.Authentication;
 public class AuthenticationMocks {
     private AuthenticationMocks() {}
 
-    public static final String email="richardalucas@zoho.com";
+    public static final String email="Richard.Lucas@eBusiness.uk";
 
     public static Authentication userAuthentication(String pin) {
       return new TestingAuthenticationToken(getUser(), null, "ROLE_ADMIN");
@@ -21,7 +18,7 @@ public class AuthenticationMocks {
     
     public static JwtUser getUser() {
     	JwtUser createdNewUser= new JwtUser();
-        createdNewUser.setUsername("richard");
+        createdNewUser.setUsername(email);
         createdNewUser.setPassword("password");
         createdNewUser.setId(1l);
         createdNewUser.setEmail(email);

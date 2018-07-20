@@ -49,6 +49,7 @@ public class AuthenticationController {
     	System.out.println("Inside register login user "+loginUser.getUsername());
     	authenticate(loginUser.getUsername(), loginUser.getPassword());
      	final UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getUsername());
+     	
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new AuthToken(token));
        

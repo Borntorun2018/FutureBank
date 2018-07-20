@@ -7,13 +7,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-//import com.eBusiness.persist.entity.user.User;
-
 import java.io.Serializable;
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import static com.eBusiness.model.Constants.ACCESS_TOKEN_VALIDITY_SECONDS;
@@ -49,11 +47,9 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(new Date());
     }
     
-    //public String generateToken(User user) {
     public String generateToken(UserDetails user) {
         Claims claims = Jwts.claims().setSubject(user.getUsername());
-        //claims.put("scopes", Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")));
-        claims.put("scopes", getAuthority(user));
+         claims.put("scopes", getAuthority(user));
         
         return Jwts.builder()
                 .setClaims(claims)
@@ -63,11 +59,12 @@ public class JwtTokenUtil implements Serializable {
                 .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
                 .compact();
     }
-    //private List<SimpleGrantedAuthority> getAuthority(User user) {
     private List<SimpleGrantedAuthority> getAuthority(UserDetails user) {
 		ArrayList<SimpleGrantedAuthority> roles = new ArrayList<SimpleGrantedAuthority>();
-		user.getAuthorities().forEach(role->roles.add(new SimpleGrantedAuthority(role.getAuthority())));
-		//user.getRoles().forEach(role->roles.add(new SimpleGrantedAuthority(role.getName())));
+		Optional authorities=Optional.ofNullable(user.getAuthorities());
+		if (authorities.isPresent()) {
+		   user.getAuthorities().forEach(role->roles.add(new SimpleGrantedAuthority(role.getAuthority())));
+		}
 		
 		return roles;
 	}

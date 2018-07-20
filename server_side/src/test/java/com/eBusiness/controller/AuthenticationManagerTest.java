@@ -2,14 +2,11 @@ package com.eBusiness.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import javax.annotation.Resource;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,34 +33,33 @@ import com.eBusiness.util.TestUtils;
 @AutoConfigureMockMvc
 public class AuthenticationManagerTest extends MockMvcSecurityTest{
 	
-	
 	@MockBean
     private AuthenticationManager authenticationManager;
 	
     @MockBean
     private UserDetailsService userDetailsService;
-	
-	
-	
-    private final String URL ="/auth";
+		
+    private final String URL ="/login/auth";
     
     @Test
     public void testLoginUser() throws Exception{
     	
-    	
+    	//Setup a mock user
        	JwtUser jwtUser =AuthenticationMocks.getUser();
+       	//Return mock user when method loadUserByUsername is called
       	when(userDetailsService.loadUserByUsername(any())).thenReturn(jwtUser);
     	
+      	//Setup a mock authenticationStub
     	Authentication authenticationStub = AuthenticationMocks.userAuthentication(jwtUser.getEmail());
+    	//Return mock authenticationStub when method authenticate is called
      	when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authenticationStub);
-     	      	  	
-      	//jwtTokenUtil.generateToken(userDetails);
       	
+     	//Setup a loginuser
      	LoginUser loginUser = new LoginUser();
      	loginUser.setPassword(jwtUser.getPassword());
      	loginUser.setUsername(jwtUser.getUsername());
      	
-    	//execute  -- Call the WS with the param
+    	//execute  -- Call the WS with loginuser
     	MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(URL)
     			                  .contentType(MediaType.APPLICATION_JSON_UTF8)
     			                  .accept(MediaType.APPLICATION_JSON_UTF8)
