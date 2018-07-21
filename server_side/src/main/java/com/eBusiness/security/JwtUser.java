@@ -24,7 +24,9 @@ public class JwtUser implements UserDetails{
 	    private boolean accountNonLocked;
 	    private boolean credentialsNonExpired;
 	    private boolean enabled;   //int
+	    private Date lastPasswordResetDate;
 	    
+	   
 	    private long salary;
 	    private int age;
 		private String token;
@@ -154,5 +156,10 @@ public class JwtUser implements UserDetails{
 			this.terminationDate = terminationDate;
 		}
 		
-	    
+		public Date getLastPasswordResetDate() {
+		  return lastPasswordResetDate;
+		}
+		public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+		  this.lastPasswordResetDate = lastPasswordResetDate;
+		}
 }

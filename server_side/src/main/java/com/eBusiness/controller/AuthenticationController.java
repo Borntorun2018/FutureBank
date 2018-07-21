@@ -6,6 +6,7 @@ import com.eBusiness.model.AuthToken;
 import com.eBusiness.model.LoginUser;
 import com.eBusiness.model.SecurityUserResponse;
 import com.eBusiness.persist.entity.user.User;
+import com.eBusiness.security.JwtUser;
 import com.eBusiness.security.SecurityUser;
 import com.eBusiness.service.user.UserService;
 
@@ -16,7 +17,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -44,6 +48,9 @@ public class AuthenticationController {
     @Autowired
     private UserDetailsService userDetailsService;
  
+    @Value("${jwt.header}")
+    private String tokenHeader;
+    
     @RequestMapping(value = "/login/auth", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody LoginUser loginUser) throws AuthenticationException {
     	System.out.println("Inside register login user "+loginUser.getUsername());
@@ -61,11 +68,38 @@ public class AuthenticationController {
     	Optional<Authentication> auth=	Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication());
     	if (auth.isPresent()) {
     		SecurityContextHolder.getContext().setAuthentication(null);
-    	    return new ResponseEntity("User successfully logged out",HttpStatus.OK);
+    	    //return new ResponseEntity("User successfully logged out",HttpStatus.OK);
+    		 return ResponseEntity.ok("");
     	}else {
     		return new ResponseEntity("User unSuccessfully logged out",HttpStatus.EXPECTATION_FAILED);
     	}
     }
+    
+    /**
+    @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
+    public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+    	
+        String authToken = request.getHeader(tokenHeader);
+        
+        final String token = authToken.substring(7);
+        String username = jwtTokenUtil.getUsernameFromToken(token);
+        JwtUser user = (JwtUser) userDetailsService.loadUserByUsername(username);
+       
+        if (jwtTokenUtil.canTokenBeRefreshed(token, user.getLastPasswordResetDate())) {
+            String refreshedToken = jwtTokenUtil.refreshToken(token);
+            return ResponseEntity.ok(new JwtAuthenticationResponse(refreshedToken));
+        } else {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }**/
+    
+    
+    
+    
+    
+    
+    
+    
     
     //**** THIS IS CURRENTLY NOT USED
     

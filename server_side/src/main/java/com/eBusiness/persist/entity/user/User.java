@@ -61,10 +61,11 @@ public class User implements Serializable {
         
     @Column(name="OSTA_TERMINATION_DATE")
 	private Date terminationDate;
-        
     
+    @Column(name="OSTA_LASTPASSWORDRESET_DATE")
+    private Date lastPasswordResetDate;
     
-    public long getId() {
+  	public long getId() {
         return id;
     }
 
@@ -205,8 +206,14 @@ public class User implements Serializable {
   	public void setCreationDate(Date creationDate) {
   		this.creationDate = creationDate;
   	}
+    
+    public Date getLastPasswordResetDate() {
+  		return lastPasswordResetDate;
+  	}
 
-
+  	public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+  		this.lastPasswordResetDate = lastPasswordResetDate;
+  	}
   	
    	public String toString() {
   		StringBuffer buffer= new StringBuffer();

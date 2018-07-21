@@ -44,8 +44,10 @@ export class AuthenticationService {
 
   //Spring security will handle the backen logout
   public logout(): Observable<boolean> {
+      debugger;
       return this.http.post(this.logoutUrl,{headers: this.headers})
                  .map((response: any) => {
+                     debugger;
                      this.token.signOut();
                      return true;
       }) 
