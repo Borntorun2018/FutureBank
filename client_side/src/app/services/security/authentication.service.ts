@@ -49,6 +49,7 @@ export class AuthenticationService {
                  .map((response: any) => {
                      debugger;
                      this.token.signOut();
+                     this.permissionsService.flushPermissions();
                      return true;
       }) 
     }

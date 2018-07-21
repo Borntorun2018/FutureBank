@@ -18,10 +18,13 @@
             "styles": [
                 "../node_modules/font-awesome/css/font-awesome.css",
                 "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "../src/sass/styles.css",
+                 "../src/sass/styles.css",
                 "styles/app.scss"
             ],
-            "scripts": ["../node_modules/chart.js/dist/Chart.js"],
+            "scripts": ["../node_modules/chart.js/dist/Chart.js",
+                        "../node_modules/bootstrap/dist/js/bootstrap.min.js"],
+
+
             "environmentSource": "environments/environment.ts",
             "environments": {
                 "dev": "environments/environment.ts",

@@ -22,11 +22,11 @@
 							       <label for="username" class="cols-sm-2 control-label">Username</label>
 							       <div class="cols-sm-10">
 							        <div class="input-group">
-							         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-							         <input type="text" class="form-control"  [(ngModel)]="model.username" name="username" id="username"  placeholder="Enter your Username" #username="ngModel" required />
-                                     <span *ngIf="f.submitted && !username.valid" class="help-block">Username is required</span>
-							        </div>
+							           <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							           <input type="text" class="form-control"  [(ngModel)]="model.username" name="username" id="username"  placeholder="Enter your Username" #username="ngModel" required />
+                                     </div>
 							       </div>
+							       <span *ngIf="f.submitted && !username.valid" class="help-block"><font color="red">Username is required</font></span>
 							    </div>
 							  </div>
 						  </div>
@@ -39,9 +39,9 @@
 						        <div class="input-group">
 						          <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 						          <input type="password" class="form-control" [(ngModel)]="model.password" name="password" id="password"  placeholder="Enter your Password"  #password="ngModel" required/>
-                                  <span *ngIf="f.submitted && !password.valid" class="help-block">Password is required</span>
-					           </div>
+ 					           </div>
 						      </div>
+						      <span *ngIf="f.submitted && !password.valid" class="help-block"><font color="red">Password is required</font></span>
 						    </div>
 						  </div>
 						</div>
