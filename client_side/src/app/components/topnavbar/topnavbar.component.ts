@@ -20,9 +20,10 @@ export class TopNavBarComponent implements OnInit {
                 private tokenStorage: TokenStorage,
                 public router: Router) {
         debugger;
-         let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
-   //const perm = [perms[0].authority];
-   this.permissionsService.loadPermissions(perms);
+        let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
+        this.permissionsService.loadPermissions(perms);
+        debugger;
+        
         let currentuser = JSON.parse(sessionStorage.getItem('isLoggedin')); 
         
         if (currentuser !== null) {
@@ -30,7 +31,7 @@ export class TopNavBarComponent implements OnInit {
          }else{
             this.username = "anonymous";
          }
-         
+         debugger;
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();

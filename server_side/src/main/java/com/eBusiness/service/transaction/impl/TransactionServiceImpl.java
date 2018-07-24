@@ -1,4 +1,4 @@
-package com.eBusiness.service.impl.transaction;
+package com.eBusiness.service.transaction.impl;
 
 import java.util.List;
 

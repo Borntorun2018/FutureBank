@@ -1,3 +1,277 @@
-<p>
-  Registration Page
-</p>
+
+Registration
+<!-- 
+
+<div id="register">
+ <form class="form-inline my-2 my-lg-0">
+			<h:form id="form" class="form-horizontal" role="form">
+			
+
+				<p:panel id="panel" styleClass="customTitleBar" header="Create Your Personal Account">
+					
+					
+					<h:messages globalOnly="true" style="color:Red;"></h:messages>
+
+
+					
+					<div class="form-group">
+						<h:outputLabel id="titleLabel" value="Title: " class="col-sm-2" />
+						<div class="col-sm-8 col-xs-12">
+							<p:selectOneMenu id="userName"
+								value="#{userController.newUser.title}">
+								<f:selectItem itemLabel="Mr" itemValue="Mr" />
+								<f:selectItem itemLabel="Mrs" itemValue="Mrs" />
+								<f:selectItem itemLabel="Miss" itemValue="Miss" />
+								<f:selectItem itemLabel="Dr" itemValue="Dr" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+					<div class="form-group">
+
+
+
+						<h:outputLabel id="forenameLabel" value="Forename:"
+							class="col-sm-2 required" />
+						<div class="col-sm-8 col-xs-12">
+							<h:inputText id="forename" required="true"
+								requiredMessage="#{msg['forename.validation.error']}"
+								value="#{userController.newUser.forename}" size="20"
+								maxlength="20" label=" ">
+								<f:validateLength minimum="2" maximum="20" />
+							</h:inputText>
+
+							<h:message id="forenameMessage" for="forename" style="color:Red;" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<h:outputLabel id="surnameLabel" value="Surname:" class="col-sm-2 required" />
+						<div class="col-sm-8 col-xs-12">
+							<h:inputText id="surname" required="true"
+								requiredMessage="#{msg['surname.validation.error']}"
+								value="#{userController.newUser.surname}" size="20"
+								maxlength="20" label=" ">
+								<f:validateLength minimum="2" maximum="20" />
+							</h:inputText>
+
+							<h:message id="surnameMessage" for="surname" style="color:Red;" />
+						</div>
+					</div>
+
+
+
+
+
+					<div class="form-group">
+
+						<h:outputLabel for="pwd1" value="Create your password:"
+							class="col-sm-2 required" />
+						<div class="col-sm-8 col-xs-12">
+							<p:password id="pwd1" value="#{userController.newUser.password}"
+								match="pwd2" label="Password" size="20" maxlength="20"
+								requiredMessage="#{msg['password.validation.error']}"
+								validatorMessage="#{msg['password.InvalidFormat.error']}"
+								feedback="true" required="true">
+								<f:validateRegex
+									pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20})" />
+							</p:password>
+
+							<h:outputLink onclick="enterPassword.show();return false;">
+								<h:graphicImage value="#{resource['images:info.png']}"
+									title="Password information" width="30px" height="30px"
+									style="background: white" />
+							</h:outputLink>
+							<p:confirmDialog header="Password Information" severity="alert"
+								widgetVar="enterPassword" modal="true" width="300" height="150">
+
+											   <f:facet name="message">
+											 	  <h:outputText value="Choose a password with a length at least 8 characters and maximum 20. Must contain at least one digit from 0-9 and one uppercase character. " />
+									           </f:facet>						                
+							</p:confirmDialog>
+
+
+							<h:message id="passwordMessage1" for="pwd1" style="color:Red;" />
+							<p class="further_info">Should be at at least 8 and maximum 20 characters in length, contain at least one uppercase character and contain at least one digit between 0-9.</p>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<h:outputLabel for="pwd2" value="Confirm Password:"
+							class="col-sm-2 required" />
+						<div class="col-sm-8 col-xs-12">
+							<p:password id="pwd2" value="#{userController.newUser.password}"
+								label="Confirm password" size="20" maxlength="20"
+								requiredMessage="#{msg['password.validation.error']}"
+								feedback="true" required="true" />
+
+							<h:message id="passwordMessage2" for="pwd2" style="color:Red;" />
+						</div>
+					</div>
+
+
+                   	<div class="form-group location">
+						<h:outputLabel id="enterAddressLabel" value="Find your address:"
+							class="col-sm-2" />
+						<div class="col-sm-5 col-xs-12">
+							<h:inputText id="autocomplete" onFocus="geolocate()" class="form-control"  
+								value="#{userController.newUser.fullAddress}" />
+
+
+							<h:outputLink onclick="enterAddress.show();return false;">
+								<h:graphicImage value="#{resource['images:info.png']}"
+									title="Find your address" width="30px" height="30px"
+									style="background: white" />
+							</h:outputLink>
+							<p:confirmDialog
+								message="Find your address using google address autocomplete"
+								header="Find your address" severity="alert"
+								widgetVar="enterAddress" modal="true" width="300" height="150">
+
+								<f:facet name="message">
+
+									<h:outputText value="Find your address using google address autocomplete. Start typing your address and google autocomplete will provide you with the nearest match" />
+									
+								</f:facet>
+
+							</p:confirmDialog>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<h:outputLabel  value="Address1:"
+							class="col-sm-2" />
+						<div class="col-sm-4 col-xs-12">
+							<h:inputText id="street_number" class="form-control"  
+								value="#{userController.newUser.addressLine1}" size="40" />
+						</div>
+					</div>
+					<div class="form-group">
+
+						<h:outputLabel  value="Address2:"
+							class="col-sm-2" />
+						<div class="col-sm-5 col-xs-12">
+							<h:inputText id="route" class="form-control"
+								value="#{userController.newUser.addressLine2}" size="60" />
+						</div>
+					</div>
+					<div class="form-group">
+
+						<h:outputLabel  value="Address3:"
+							class="col-sm-2" />
+						<div class="col-sm-4 col-xs-12">
+							<h:inputText id="locality" class="form-control"
+								value="#{userController.newUser.addressLine3}" size="40" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel value="County:"
+							class="col-sm-2" />
+						<div class="col-sm-4 col-xs-12">
+
+							<h:inputText id="administrative_area_level_1" class="form-control"
+								value="#{userController.newUser.addressCounty}" size="40" />
+						</div>
+					</div>
+					<div class="form-group">
+
+						<h:outputLabel  value="Postcode:"
+							class="col-sm-2" />
+						<div class="col-sm-3 col-xs-12">
+							<h:inputText id="postal_code" class="form-control"
+								value="#{userController.newUser.addressPostCode}" size="30" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel  value="Country:"
+							class="col-sm-2" />
+						<div class="col-sm-4 col-xs-12">
+							<h:inputText id="country" class="form-control"
+								value="#{userController.newUser.addressCountry}" size="40" />
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel for="email" value="Paypal email:" class="col-sm-2 required" />
+						<div class="col-sm-8 col-xs-12">
+
+
+							<p:inputText id="email" required="true" label="email" size="40"
+								maximum="254" 
+								requiredMessage="Please enter your Paypal email address."
+								validatorMessage="Invalid email format"
+								value="#{userController.newUser.email}">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+					
+							
+							<h:outputLink onclick="email.show();return false;">
+								<h:graphicImage value="#{resource['images:info.png']}"
+									title="Email information" width="30px" height="30px"
+									style="background: white" />
+							</h:outputLink>
+							<p:confirmDialog header="Paypal Email information"
+								severity="alert" widgetVar="email" modal="true" width="300"
+								height="250">
+								<f:facet name="message">
+									<h:outputText value="Your Paypal email will be used when you are buying or selling used racquets via Paypal. Example:- Once you have selected a used racquet to buy/sell you will be taken to Paypals Secure website, where you will be asked to complete your transaction." />
+								</f:facet>
+							</p:confirmDialog>
+							<h:message id="emailMessage" for="email" style="color:Red;" /><br/>
+							<p class="further_info">Your email will be used as your username</p>
+	
+						</div>
+						
+					</div>
+
+					<div class="form-group">
+						<h:outputLabel id="homePhoneNoLabel" for="homePhoneNo"
+							value="Home Phone No:" class="col-sm-2" />
+
+						<div class="col-sm-3 col-xs-12">
+							<h:inputText id="homePhoneNo" required="false" class="form-control"
+								requiredMessage="#{msg['homePhoneNo.validation.error']}"
+								value="#{userController.newUser.homePhoneNo}" size="20"
+								maxlength="20" label=" ">
+								<f:validateLength minimum="0" maximum="20" />
+							</h:inputText>
+
+							<h:message id="homePhoneNoMessage" for="homePhoneNo"
+								style="color:Red;" />
+						</div>
+					</div>
+				
+					
+					<div class="form-group">
+
+						<h:outputLabel id="mobileNoLabel" for="mobileNo"
+							value="Mobile No:" class="col-sm-2 required" />
+						<div class="col-sm-3 col-xs-12">
+							<h:inputText id="mobileNo" required="true" class="form-control"
+								requiredMessage="#{msg['mobileNo.validation.error']}"
+								value="#{userController.newUser.mobilePhoneNo}" size="20"
+								maxlength="20" label=" ">
+								<f:validateLength minimum="2" maximum="20" />
+							</h:inputText>
+
+							<h:message id="mobileNoMessage" for="mobileNo" style="color:Red;" />
+						</div>
+					</div>
+					
+					
+					
+					
+<div class="row">
+				<div class="col-sm-offset-2 col-sm-3 col-md-2 col-xs-12">
+					<h:commandButton value="Save" disabled="false" class="btn-info btn-block"
+						action="#{userController.getRegisterNewUser()}" />
+				</div>
+</div>						
+
+
+
+				</p:panel>
+
+  </h:form>
+</div>
+
+-->

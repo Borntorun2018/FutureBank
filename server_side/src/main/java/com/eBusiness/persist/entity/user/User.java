@@ -1,6 +1,7 @@
 package com.eBusiness.persist.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.eBusiness.persist.entity.image.Image;
 import com.eBusiness.security.Role;
 
 import java.io.Serializable;
@@ -18,6 +19,77 @@ public class User implements Serializable {
     @Column(name="OSTA_ID")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
+      
+    @Transient
+	private boolean userRemovedDisplayedImages; 
+    
+	 public String getForenames() {
+		return forenames;
+	}
+
+	public void setForenames(String forenames) {
+		this.forenames = forenames;
+	}
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getHomeTelephoneNo() {
+		return homeTelephoneNo;
+	}
+
+	public void setHomeTelephoneNo(String homeTelephoneNo) {
+		this.homeTelephoneNo = homeTelephoneNo;
+	}
+
+	public String getMobileTelephoneNo() {
+		return mobileTelephoneNo;
+	}
+
+	public void setMobileTelephoneNo(String mobileTelephoneNo) {
+		this.mobileTelephoneNo = mobileTelephoneNo;
+	}
+
+	public String getCreationUser() {
+		return creationUser;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public void setAccountNONLocked(int accountNONLocked) {
+		this.accountNONLocked = accountNONLocked;
+	}
+
+	public void setAccountNONExpired(int accountNONExpired) {
+		this.accountNONExpired = accountNONExpired;
+	}
+
+	public void setCredentialsNONExpired(int credentialsNONExpired) {
+		this.credentialsNONExpired = credentialsNONExpired;
+	}
+
+	@Column(name="OSTA_FORENAMES")
+	 private String forenames;
+	 
+	 @Column(name="OSTA_SURNAME")
+	 private String surname;
+	 
+	 @Column(name="OSTA_HOME_TELEPHONE_NO")
+	 private String homeTelephoneNo;
+	 
+	 @Column(name="OSTA_MOBILE_TELEPHONE_NO")
+	 private String mobileTelephoneNo;
     
     @Column(name="OSTA_USERNAME")
     private String username;
@@ -111,7 +183,42 @@ public class User implements Serializable {
    public void setEmail(String email) {
 		this.email = email;
    }	  
-        
+      
+    //User Image
+	//One User is associated with many Images
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "user",fetch = FetchType.EAGER) 
+	private Set<Image> images;
+	public Set<Image> getImages() {
+		return images;
+	}
+	public void setImages(Set<Image> images) {
+		this.images = images;
+	}
+	
+	
+	public void addImage(Image image) {
+	        images.add(image);
+	        image.setUser(this);
+	}
+	public void removeImage(Image image) {
+	        images.remove(image);
+	        image.setUser(null);
+	}
+	
+	public void removeAllImages() {
+		
+		images.stream().forEach(image->removeImage(image));
+	}	
+     
+
+
+   
+   
+   
+   
+   
+   
+   
   //USER is the OWNINS OF ROLS
   	//==========================
   	@JoinTable (name = "OPUS_STAFF_ROLE_LINK", 
@@ -214,6 +321,26 @@ public class User implements Serializable {
   	public void setLastPasswordResetDate(Date lastPasswordResetDate) {
   		this.lastPasswordResetDate = lastPasswordResetDate;
   	}
+  	
+  	
+  	
+  	public boolean isUserRemovedDisplayedImages() {
+		return userRemovedDisplayedImages;
+	}
+
+	public void setUserRemovedDisplayedImages(boolean userRemovedDisplayedImages) {
+		this.userRemovedDisplayedImages = userRemovedDisplayedImages;
+	}
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
    	public String toString() {
   		StringBuffer buffer= new StringBuffer();

@@ -1,5 +1,4 @@
-package com.eBusiness.service.impl.accounts;
-
+package com.eBusiness.service.accounts.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

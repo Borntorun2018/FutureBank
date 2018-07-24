@@ -22,14 +22,22 @@ public class UserRoleLink implements Serializable
 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OSRL_SEQ")
 @Column(name = "OSRL_ID", updatable = true, nullable = false)
 Long id;
-
-  @Column(name = "OSRL_PIN")
-  private String pin;
   
   @Column(name = "OSRL_OROL_ID")
   private Long rolId;
     
-  @Column(name = "OSRL_CREATION_DATE")
+  @Column(name = "OSRL_USER_ID")
+  private Long userId;
+  
+  public Long getUserId() {
+	return userId;
+}
+
+public void setUserId(Long userId) {
+	this.userId = userId;
+}
+
+@Column(name = "OSRL_CREATION_DATE")
   private Date creationDate;
       
   @Column(name = "OSRL_CREATION_USER")
@@ -69,14 +77,6 @@ Long id;
   public void setId(Long id) {
 		this.id = id;
   }
-	
-	public String getPin() {
-		return pin;
-	}
-	
-	public void setPin(String pin) {
-		this.pin = pin;
-	}
 	
 	public Long getRolId() {
 		return rolId;

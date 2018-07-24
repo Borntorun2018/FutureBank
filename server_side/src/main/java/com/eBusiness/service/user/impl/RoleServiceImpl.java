@@ -1,4 +1,4 @@
-package com.eBusiness.service.impl.user;
+package com.eBusiness.service.user.impl;
 
 import java.util.HashSet;
 import java.util.Optional;

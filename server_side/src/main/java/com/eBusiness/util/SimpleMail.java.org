@@ -1,0 +1,103 @@
+package com.newborn.utils;
+
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.lang.System;
+
+public class SimpleMail  {
+   
+    private boolean debug = true;
+    
+    public SimpleMail(){}
+    
+    
+ 
+    public void send( String serverName, String recipients[], String subject, String message , String from) throws MessagingException{
+        send(null, serverName, recipients, subject, message, from);
+    }
+    public void send(String batchName, String serverName, String recipients[], String subject, String message , String from) throws MessagingException     {
+        String server = serverName.toUpperCase();  
+        String smtpHost = serverActive(server);
+        emailDump(smtpHost, serverName, recipients, subject, message, from);
+        boolean debug = false;
+        //Set the host smtp address
+        Properties props = new Properties();
+        props.put("mail.smtp.host", smtpHost);
+        // create some properties and get the default Session
+        Session session = Session.getDefaultInstance(props, null);
+        session.setDebug(debug);
+        // create a message
+        Message msg = new MimeMessage(session);
+        // set the from and to address
+        InternetAddress addressFrom = new InternetAddress(from);
+        msg.setFrom(addressFrom);
+        InternetAddress[] addressTo = new InternetAddress[recipients.length]; 
+        for (int i = 0; i < recipients.length; i++)
+        {
+            addressTo[i] = new InternetAddress(recipients[i]);
+        }
+        msg.setRecipients(Message.RecipientType.TO, addressTo);
+        msg.setSubject(subject);
+        msg.setContent(message, "text/plain");
+
+         
+        Transport.send(msg);
+        if (debug) System.out.println(batchName+" sent out following mail message:"+msg);
+       
+    }  
+    private String serverActive(String server) {
+       String smtpName="";
+       server=((server!=null)&&(server.length()>0))?server.trim():"";
+
+       if ((server.equals("HQTEST9IAS02.GMP.ORG")) || (server.equals("HQPROD9IAS05.GMP.ORG"))) {
+          //Following code changed to allow a the mail server name to be passed
+          smtpName = System.getProperty("smtpName");  
+          //smtpName = "Mimesweeper01.gmp.org";
+       }else {
+          smtpName ="10.2.1.15";  //"hqpdexchas01.gmp.org"; //"10.4.1.181";  //"gmpmail03.gmp.org";
+       }
+       return smtpName;
+    }
+    
+    private void emailDump(String smtpHost, 
+                           String serverName,
+                           String recipients[],
+                           String subject,
+                           String message,
+                           String from){
+
+       
+       if (debug){
+            //Display to console
+            //==================
+            System.out.println("SimpleMail emailDump Data");
+            System.out.println("=========================");
+            System.out.println("smtpHost="+smtpHost+" length="+smtpHost.length());
+            System.out.println("serverName="+serverName+" length="+serverName.length());
+            System.out.println("subject="+subject+" length="+subject.length());
+            System.out.println("message="+message+" length="+message.length());
+            System.out.println("from="+from+" length="+from.length());
+        }
+    }
+    
+    //The following code is used as a test harness to test the above code.
+    public static void main(String []args){
+        SimpleMail mail = new SimpleMail();
+        String serverName="10.251.132.211"; //localhost 
+        String [] recipients={"richard.lucas@gmp.police.uk"}; 
+        String subject="What Subject";
+        String message="HI";
+        String from="richard.lucas@gmp.police.uk";
+        try{
+            mail.send(serverName,recipients,subject,message,from);
+        }catch(MessagingException me){
+            System.out.println("Messaging Exception on calling mail.send:"+me);
+        }
+    }
+}

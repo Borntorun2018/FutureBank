@@ -1,0 +1,189 @@
+package com.newborn.utils;
+
+import java.io.File;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.apache.velocity.app.VelocityEngine;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.http.HttpRequest;
+import org.springframework.mail.MailAuthenticationException;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSendException;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
+import org.springframework.ui.velocity.VelocityEngineUtils;
+
+import com.newborn.web.restful.UserManagerController;
+import com.sun.mail.smtp.SMTPSendFailedException;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * 
+ * @author richard lucas
+ *
+ */
+public class EmailSender {
+
+	private static final Logger log = Logger.getLogger(EmailSender.class);
+	 
+	private JavaMailSender mailSender;
+	private VelocityEngine velocityEngine;
+	private Map model = new HashMap();
+
+	public JavaMailSender getMailSender() {
+		return mailSender;
+	}
+
+	public void setMailSender(JavaMailSender mailSender) {
+		this.mailSender = mailSender;
+	}
+
+	public VelocityEngine getVelocityEngine() {
+		return velocityEngine;
+	}
+
+	public void setVelocityEngine(VelocityEngine velocityEngine) {
+		this.velocityEngine = velocityEngine;
+	}
+
+	public Map getModel() {
+		return model;
+	}
+
+	public void setModel(Map model) {
+		this.model = model;
+	}
+
+	public void sendEmail(final HttpServletRequest request,final String toEmailAddresses,
+			final String fromEmailAddress, final String subject,
+			final String vmFile) throws MailAuthenticationException,MessagingException {
+		sendEmail(request,toEmailAddresses, fromEmailAddress, subject, null, null, vmFile);
+	}
+
+	public void sendEmailWithAttachment(final HttpServletRequest request,final String toEmailAddresses,
+			final String fromEmailAddress, final String subject,
+			final String attachmentPath, final String attachmentName,
+			final String vmFile) throws MessagingException{
+		sendEmail(request,toEmailAddresses, fromEmailAddress, subject, attachmentPath, attachmentName, vmFile);
+	}
+	
+
+	private void sendEmail(final HttpServletRequest request, final String toEmailAddresses,
+			final String fromEmailAddress, final String subject,
+			final String attachmentPath, final String attachmentName,
+			final String vmFile)throws MailAuthenticationException,MessagingException,SMTPSendFailedException,MailSendException {
+		
+		
+		    //Note that if calling this from a batch job you will not have
+		    //access to HttpServletRequest. I have removed the logo from inforSupplierListedRacketsEnded due to this reason
+			try
+			{
+				
+				String serverName = "10.251.132.211"; //request.getServerName();
+				int portNumber = request.getServerPort();
+				String contextPath = request.getContextPath();
+				//not sure if including portnumber will course problem on live system
+				String mainUrl = serverName + ":" +portNumber + contextPath;
+				// if localhost then because of way google caches images in email then substitute another maiurl
+				//if (serverName.equals("localhost")) {
+				//	mainUrl = OPENSHIFT_DEOLOYED_URL;
+				//}
+				String logoUrl = "http://" + mainUrl + "/images/logo.jpg";
+				//String logoUrl = "http://localhost:8080/images/logo.jpg";
+				model.put("logoUrl" , logoUrl);
+			}catch(Exception e){
+				
+			log.error("Fault setting up email logoUrl", e);
+				
+			}
+			
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			
+//new stuff	
+			//http://www.codejava.net/java-ee/javamail/send-e-mail-with-attachment-in-java
+			Multipart multipart = new MimeMultipart();
+    		// creates body part for the message
+			MimeBodyPart messageBodyPart = new MimeBodyPart();
+			messageBodyPart.setContent( message, "text/html; charset=utf-8" );
+			// creates body part for the attachment
+			MimeBodyPart attachPart = new MimeBodyPart();
+			// adds parts to the multipart
+			multipart.addBodyPart(messageBodyPart);
+			multipart.addBodyPart(attachPart);
+			// sets the multipart as message's content
+			message.setContent(multipart);
+//end of new stuff			
+			
+			message.setSubject(subject);
+			MimeMessageHelper helper;
+			helper = new MimeMessageHelper(message, true);
+			helper.setTo(toEmailAddresses);
+			helper.setSentDate(new Date());
+			helper.setFrom(new InternetAddress("mary.harrow@gmp.police.uk")); //fromEmailAddress
+		    String msg = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "vm/"+vmFile, "UTF-8", model); //UTF-8
+		    helper.setText(msg, true);
+		    try{
+			    	
+		    	
+			    mailSender.send(message);
+		    }catch(MailException e)
+		    {
+		    	log.error("Error calling mailSender.send(message)",e);
+		    	e.printStackTrace();
+		    	throw new MailSendException("MailSendException on calling mailSender.send(message)",e);
+		    }
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	public void openFile() {
+		// Resource
+		// resource=AppContext.getApplicationContext().getResource("file:webapp/resources/images/siteLogo1.jpg");;
+		ApplicationContext ctx = new FileSystemXmlApplicationContext(
+				"file:/root/webapp/resources/images");
+	}
+
+	/**
+	public static void main(String[] args) {
+		StringBuffer imagehtml = new StringBuffer();
+		imagehtml.append("\"<img src=\\\"cid:logo.png\\"); // "<img
+															// src=\"cid:logo.png\
+		imagehtml.append("\" height=\"42\"");
+		imagehtml.append(" width=\"42\"");
+		imagehtml.append(">");
+		imagehtml.append("</img><div>My logo</div>");
+		System.out.println(imagehtml.toString());
+	}
+	**/
+
+	
+	
+
+}

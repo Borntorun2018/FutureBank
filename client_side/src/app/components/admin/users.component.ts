@@ -62,12 +62,17 @@ export class UsersComponent implements OnInit {
        //this method will trigger every page click 
        console.log('Number items per page: ' + event.itemsPerPage);
      }
+    
+    
+    
      public viewUser(id:any):void{
          console.log('Inside viewUser id: ' + id);
      }
-     public editUser(id:any):void{
-         console.log('Inside editUser id: ' + id);
+     public updateUser(user:User):void{
+         console.log('Inside editUser id: ' + user.id);
      }
-   
+     public deleteUser(user:User):void{
+         console.log('Inside deletUser id: ' + user.id);
+     }
      
 }

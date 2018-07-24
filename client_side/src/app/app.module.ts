@@ -8,7 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpRequest, HttpHandl
 import { ImageUploadModule } from 'angular2-image-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; //importing the module
 import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
@@ -85,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
     Ng2SearchPipeModule, 
     Ng2OrderModule, 
     NgxPaginationModule,
+    AngularFontAwesomeModule,
     ImageUploadModule.forRoot(),
     NgxPermissionsModule.forRoot(),
     NgbModule.forRoot(),
