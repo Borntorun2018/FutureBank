@@ -64,6 +64,7 @@ public class UserController {
     
     
     //Get all the current users
+    /**
     @RequestMapping(value="/user", method = RequestMethod.GET)
     public List<User> listUser(){
     	try {
@@ -71,6 +72,25 @@ public class UserController {
     	}catch(DataAccessException dae) {
     		return new ArrayList<User>();
     	}
+    }
+    **/
+    
+    
+    @RequestMapping(value="/user", method = RequestMethod.GET)
+    public ResponseEntity<UserResponse> listUser1()throws ServiceException {	
+    	UserResponse response = new UserResponse();
+    	
+    	try {
+    	  List<User> content=userService.findAllUsers();
+		  Page<User> users = new PageImpl<User>(content);
+		  response.setUsers(users);
+		  response.setCode(HttpStatus.OK.name());
+	
+     	}catch(DataAccessException dae) {
+			log.error(propertyService.getPropertyValue("error.restful.during.listUser"),dae.getCause());
+			throw new ServiceException(propertyService.getPropertyValue("error.system.failure.during.listUsers.request"),dae);
+    	}
+    	return new ResponseEntity<UserResponse>(response, HttpStatus.OK);
     }
     
     
