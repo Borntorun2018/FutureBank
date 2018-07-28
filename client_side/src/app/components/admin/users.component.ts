@@ -35,12 +35,12 @@ export class UsersComponent implements OnInit {
           this.loading = true;
          this.message = "Please wait - loading data";
          this.usersService.getAllUsers()
-             .subscribe(users => {
+             .subscribe((data:any) => {
                  debugger;
-                 this.users=<User[]>users;
-                 this.status == 'Succes';
-                 console.log('user details: ' + this.users[0].username);
-              }, error => {
+                 console.log(data);
+                    this.users= data.users.content;
+                    this.status == 'Succes';
+               }, error => {
                   debugger;
                  this.loading = false;
                  this.error = error.message;
@@ -62,17 +62,62 @@ export class UsersComponent implements OnInit {
        //this method will trigger every page click 
        console.log('Number items per page: ' + event.itemsPerPage);
      }
-    
-    
-    
-     public viewUser(id:any):void{
-         console.log('Inside viewUser id: ' + id);
+     
+     public viewUser(user:User):void{
+         this.usersService.getUser(user.id)
+             .subscribe((data:any) => {
+                 debugger;
+                 console.log(data);
+                    this.users= data.user;
+                    this.status == 'Succes';
+               }, error => {
+                  debugger;
+                 this.loading = false;
+                 this.error = error.message;
+                 this.status == 'Error';
+                 
+              });       
+          debugger;
+         console.log('Inside viewUser id: ' + user.id);
      }
+    
+    
      public updateUser(user:User):void{
-         console.log('Inside editUser id: ' + user.id);
+         debugger;
+         console.log('Inside edit User id: ' + user.id);
+         
+         this.usersService.updateUser(user)
+             .subscribe((data:any) => {
+                 debugger;
+                 console.log(data);
+                    this.users= data.user;
+                    this.status == 'Succes';
+               }, error => {
+                  debugger;
+                 this.loading = false;
+                 this.error = error.message;
+                 this.status == 'Error';
+                 
+              });              
      }
-     public deleteUser(user:User):void{
+    
+      public deleteUser(user:User):void{
+         debugger;
          console.log('Inside deletUser id: ' + user.id);
+         
+         this.usersService.deleteUser(user.id)
+             .subscribe((data:any) => {
+                 debugger;
+                 console.log(data);
+                    this.users= data.user;
+                    this.status == 'Succes';
+               }, error => {
+                  debugger;
+                 this.loading = false;
+                 this.error = error.message;
+                 this.status == 'Error';
+                 
+              });                   
      }
      
 }

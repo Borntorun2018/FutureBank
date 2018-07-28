@@ -46,7 +46,7 @@ export class TokenStorage {
     public getUsername(): string {
         //Should be able to get the name from the token
         //return  window.sessionStorage.getItem(USER_NAME); 
-        return "to be done";
+        return "Maureen";
     }
    
     public isTokenExpired(): boolean {

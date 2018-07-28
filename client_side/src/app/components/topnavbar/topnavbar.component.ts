@@ -52,6 +52,7 @@ export class TopNavBarComponent implements OnInit {
     ngOnInit() {}
         
     ngAfterViewInit() {
+        debugger;
     }
     
   

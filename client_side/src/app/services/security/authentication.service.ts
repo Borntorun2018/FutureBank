@@ -26,10 +26,18 @@ export class AuthenticationService {
       
     return this.http.post(this.loginUrl, credentials, {headers: this.headers})
           .map((response: any) => {  
+          
+           debugger;
+                 
+          //Setup the users token    
           let token = response.token;
           if (token) {
                 this.token.saveToken(token);
+                debugger;
+                console.log("Username="+this.token.getUsername());
+              
                 let perms: any=this.token.getUsernameAuthority();
+                //Setup the users permissions
                 for(let i=0; i<perms.length; i++){
                    this.permissionsService.addPermission(perms[i].authority);  
                  }
