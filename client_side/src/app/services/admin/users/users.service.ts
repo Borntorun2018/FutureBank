@@ -36,8 +36,8 @@ export class UsersService {
   }
         
   updateUser(user: User): Observable<User> {
-      //debugger;
-      return this.http.put(this.userUrl, JSON.stringify({user: user}))
+      debugger;
+      return this.http.post(this.userUrl, JSON.stringify({user: user}))
                         .map((response: Response) => response)
                        .catch((err: Response) => {
                             console.log((err.statusText || "Error occurred attempting to update a user"));

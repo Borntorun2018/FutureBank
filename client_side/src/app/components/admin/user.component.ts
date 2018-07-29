@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Location }                 from '@angular/common';
+
 //import { Router } from '@angular/router';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { UsersService } from './../../services/admin/users/users.service';
@@ -21,7 +23,7 @@ export class UserComponent implements OnInit {
     message: any;
     status: any;
     
-        constructor(private  usersService: UsersService, private route: ActivatedRoute ) {}
+        constructor(private  usersService: UsersService, private route: ActivatedRoute,private location: Location ) {}
          
      ngOnInit() {
         this.loading = true;
@@ -29,13 +31,8 @@ export class UserComponent implements OnInit {
          
          this.route.params
         .switchMap((params: Params) => this.usersService.getUser(+params['id']))
-        .subscribe(user => {this.user = user;
-                            debugger;
-                            console.log(user.code);
-                            console.log(user.error);
-                            console.log(user.message);   
-                            console.log(user.users.content[0]); 
-            
+        .subscribe(data => {this.user = data.users.content[0];
+              
             
 /**            
 accountNONExpired:1
@@ -66,5 +63,16 @@ username:"Mary.Harrow@eBusiness.uk"
                             });
      }
    
-     
+  save(): void {
+      debugger;
+    this.usersService.updateUser(this.user)
+      .then(() => this.goBack());
+  }  
+    
+    
+    
+    
+  goBack(): void {
+    this.location.back();
+  }    
 }
