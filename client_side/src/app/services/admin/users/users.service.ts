@@ -16,7 +16,7 @@ export class UsersService {
   constructor(private http: HttpClient) {}
     
   getAllUsers(): Observable<Object> {
-      debugger;
+      //debugger;
        return this.http.get(this.userUrl)
                        .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -36,7 +36,7 @@ export class UsersService {
   }
         
   updateUser(user: User): Observable<User> {
-      debugger;
+      //debugger;
       return this.http.put(this.userUrl, JSON.stringify({user: user}))
                         .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -47,7 +47,7 @@ export class UsersService {
     
     
   deleteUser(id: number): Observable<Object> {
-      debugger;
+      //debugger;
       return this.http.delete(this.userUrl+"/"+id)
                         .map((response: Response) => response)
                        .catch((err: Response) => {

@@ -63,12 +63,26 @@ export class UsersComponent implements OnInit {
        console.log('Number items per page: ' + event.itemsPerPage);
      }
      
+    
+    
+    public viewUser(user:User):void{
+      let link = ['/user', user.id];
+      this.router.navigate(link);
+    }
+    
+    
+    
+    /**
      public viewUser(user:User):void{
          this.usersService.getUser(user.id)
              .subscribe((data:any) => {
                  debugger;
                  console.log(data);
-                    this.users= data.user;
+                    //this.users= data.user;
+                 
+                    let link = ['/detail', hero.id];
+                    this.router.navigate(link);
+                 
                     this.status == 'Succes';
                }, error => {
                   debugger;
@@ -80,6 +94,7 @@ export class UsersComponent implements OnInit {
           debugger;
          console.log('Inside viewUser id: ' + user.id);
      }
+    **/
     
     
      public updateUser(user:User):void{

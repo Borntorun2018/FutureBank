@@ -26,7 +26,12 @@ public interface UserService {
  		     
     public  Page<User> findAllUsers( Specification<User> specification,Pageable pageRequest) throws DataAccessException;
 	
-	public User findUser(String userId) throws DataAccessException;
+	/**
+	 * @param userId
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public User findUser(Long userId) throws DataAccessException;
 	
 	public User updateUser(User user) throws DataAccessException;
 	
@@ -34,7 +39,7 @@ public interface UserService {
 	
 	public void deleteUserRoleLink(UserRoleLink userRoleLink)throws DataAccessException;
 	
-	public void deleteUser(String userId) throws DataAccessException;
+	public void deleteUser(Long userId) throws DataAccessException;
 
 	public User findUserByEmail(String email) throws DataAccessException;
     

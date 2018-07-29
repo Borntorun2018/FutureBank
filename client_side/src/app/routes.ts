@@ -5,6 +5,9 @@ import { HomeComponent } from "./components/home/home.component";
 import { AboutComponent } from "./components/about/about.component";
 import { AccessDeniedComponent } from "./components/access-denied/access-denied.component";
 import { UsersComponent } from "./components/admin/users.component";
+import { UserComponent } from "./components/admin/user.component";
+
+
 import { ContactusComponent } from "./components/contactus/contactus.component";
 import { ProductDetailComponent } from "./components/product/productDetail.component";
 import { ProfileComponent } from "./components/profile/profile.component";
@@ -24,6 +27,10 @@ export const appRoutes: Routes = [
                                             { path: 'registration', component: RegistrationComponent },
                                             { path: 'users', component: UsersComponent },
                                             
+                                            
+                                            { path: 'user/:id', component: UserComponent },
+                                            
+                                           
                                             { path: 'logout', component: LogoutComponent},
                                             { path: 'not-found', component: PageNotFoundComponent },
                                             { path: 'product', component: ProductDetailComponent},

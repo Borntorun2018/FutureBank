@@ -19,12 +19,12 @@ export class LogoutComponent implements OnInit {
     constructor(public router: Router, public authenticationService: AuthenticationService) {}
 
      ngOnInit() {
-         debugger;
+         //debugger;
         this.logout(); 
     }
 
     logout() {
-        debugger;
+        //debugger;
         this.loading = true;
         this.authenticationService.logout()
             .subscribe(result => {

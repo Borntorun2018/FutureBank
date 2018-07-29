@@ -29,7 +29,7 @@ import com.eBusiness.security.Role;
  */
 @Transactional
 @RepositoryRestResource
-public interface UserRepository extends PagingAndSortingRepository<User, String>,GeneralJpaSpecificationExecutor<User>  { 
+public interface UserRepository extends PagingAndSortingRepository<User, Long>,GeneralJpaSpecificationExecutor<User>  { 
 	
 		
 	public User findByEmail(String email);

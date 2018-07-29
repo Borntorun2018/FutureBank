@@ -27,13 +27,13 @@ export class AuthenticationService {
     return this.http.post(this.loginUrl, credentials, {headers: this.headers})
           .map((response: any) => {  
           
-           debugger;
+           //debugger;
                  
           //Setup the users token    
           let token = response.token;
           if (token) {
                 this.token.saveToken(token);
-                debugger;
+                //debugger;
                 console.log("Username="+this.token.getUsername());
               
                 let perms: any=this.token.getUsernameAuthority();
@@ -55,7 +55,7 @@ export class AuthenticationService {
       debugger;
       return this.http.post(this.logoutUrl,{headers: this.headers})
                  .map((response: any) => {
-                     debugger;
+                     //debugger;
                      this.token.signOut();
                      this.permissionsService.flushPermissions();
                      return true;

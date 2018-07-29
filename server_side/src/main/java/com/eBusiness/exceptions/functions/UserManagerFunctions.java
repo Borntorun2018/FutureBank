@@ -55,7 +55,7 @@ public class UserManagerFunctions {
 	 private void saveImageToDataBase(String filename,Image image) throws DataAccessException{
 		  log.debug("Inside saveImageToDataBase using image filename:"+filename+ " for userId="+image.getUserId()); 
 		  //Gets the user associated with the image
-		  User user = userService.findUser(image.getUserId().toString());
+		  User user = userService.findUser(image.getUserId());
 		  //Set the generated filename 
 		  image.setName(filename);
 		  //Add the image details to the user 

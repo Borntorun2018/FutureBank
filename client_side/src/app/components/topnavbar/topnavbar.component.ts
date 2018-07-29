@@ -19,10 +19,10 @@ export class TopNavBarComponent implements OnInit {
                 private translate: TranslateService, 
                 private tokenStorage: TokenStorage,
                 public router: Router) {
-        debugger;
+        //debugger;
         let perms: [any]=[this.tokenStorage.getUsernameAuthority()];
         this.permissionsService.loadPermissions(perms);
-        debugger;
+        //debugger;
         
         let currentuser = JSON.parse(sessionStorage.getItem('isLoggedin')); 
         
@@ -52,7 +52,7 @@ export class TopNavBarComponent implements OnInit {
     ngOnInit() {}
         
     ngAfterViewInit() {
-        debugger;
+        //debugger;
     }
     
   

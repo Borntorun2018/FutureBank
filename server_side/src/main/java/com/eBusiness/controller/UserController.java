@@ -129,7 +129,7 @@ public class UserController {
 	 //==========
 	 //@PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	 public ResponseEntity<UserResponse>  getUser(@PathVariable("id") String id) throws ServiceException {	 
+	 public ResponseEntity<UserResponse>  getUser(@PathVariable("id") Long id) throws ServiceException {	 
 		 log.debug(propertyService.getPropertyValue("info.exit.restful.userController.search"));		 
 		 UserResponse response = new UserResponse();
 		 User user = null;
@@ -237,7 +237,7 @@ public class UserController {
 	 //=============
 	 //@PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "/user", method = RequestMethod.DELETE)
-	 public ResponseEntity<Response> deleteUser(@RequestParam("userId") String userId) throws ServiceException {
+	 public ResponseEntity<Response> deleteUser(@RequestParam("userId") Long userId) throws ServiceException {
 		 Response response = new Response();
 		 log.debug("Inside restful UserController method:deleteUser");
 		 try{

@@ -23,7 +23,7 @@ export class ProductDetailComponent {
  
     //imageUploaded(event:any) {
     imageUploaded(file: FileHolder) {
-        debugger;
+       // debugger;
         console.log(event);
         this.imageSource=file.src;
         //this.uploadedimages.push(new Image(1,file.src,"temp"));
@@ -45,13 +45,13 @@ export class ProductDetailComponent {
     
       onUploadFinished(file: FileHolder) {
       
-          debugger;
+          //debugger;
           //this.uploadedimages.push(new Image(1,file.src,"temp"));
           this.imageSource= file.src;
        }
 
       onRemoved(file: FileHolder) {
-          debugger;
+          //debugger;
     /**
      https://segmentfault.com/a/1190000008761862
      console.log(event);
@@ -67,7 +67,7 @@ export class ProductDetailComponent {
       }
 
       onUploadStateChanged(state: boolean) {
-       debugger;   
+       //debugger;   
       console.log("onUploadStateChanged "); 
       }   
     

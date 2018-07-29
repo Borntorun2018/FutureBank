@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
  	}
 	
 	@Transactional	
-	public User findUser(String userId)throws DataAccessException{
+	public User findUser(Long userId)throws DataAccessException{
 		try{
 			User user =  userRepository.findOne(userId);
 			
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 	
 			
 	@Transactional
-	public void deleteUser(String userId)throws DataAccessException{
+	public void deleteUser(Long userId)throws DataAccessException{
 		try{
 			userRepository.delete(userId);
 		}catch(org.springframework.dao.DataAccessException dae){

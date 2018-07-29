@@ -24,13 +24,13 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        debugger;
+       // debugger;
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
-                debugger;
+                //debugger;
                 if (result === true) {
-                    debugger;
+                    //debugger;
                     this.message="Successfully logged in"
                     this.status = 'Succes';   
                     this.router.navigate(['home']);
