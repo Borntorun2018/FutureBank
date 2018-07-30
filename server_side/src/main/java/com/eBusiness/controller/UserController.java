@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -61,21 +62,7 @@ public class UserController {
          
     @Autowired
     RoleService roleService;
-    
-    
-    //Get all the current users
-    /**
-    @RequestMapping(value="/user", method = RequestMethod.GET)
-    public List<User> listUser(){
-    	try {
-          return userService.findAllUsers();
-    	}catch(DataAccessException dae) {
-    		return new ArrayList<User>();
-    	}
-    }
-    **/
-    
-    
+           
     @RequestMapping(value="/user", method = RequestMethod.GET)
     public ResponseEntity<UserResponse> listUser1()throws ServiceException {	
     	UserResponse response = new UserResponse();
@@ -95,7 +82,7 @@ public class UserController {
     
     
     //Search for users
-    //@PreAuthorize("hasAuthority('CORE OPUS')")
+     @PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "user/search", method = RequestMethod.POST)
 	 public ResponseEntity<UserResponse> search(@RequestBody UserRequestWrapper  request) throws ServiceException {	 	 
 		 log.debug(propertyService.getPropertyValue("info.inside.restful.userManagerController.search"));
@@ -127,7 +114,7 @@ public class UserController {
     
      //Get a User
 	 //==========
-	 //@PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	 public ResponseEntity<UserResponse>  getUser(@PathVariable("id") Long id) throws ServiceException {	 
 		 log.debug(propertyService.getPropertyValue("info.exit.restful.userController.search"));		 
@@ -153,7 +140,7 @@ public class UserController {
     
     
      //Update User
-	 //@PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "/user", method = RequestMethod.POST)
 	 public ResponseEntity<UserResponse>  updateUser(@RequestBody UserRoleRequestWrapper request) throws ServiceException {	
 		 
@@ -235,7 +222,7 @@ public class UserController {
 	 
 	 //Delete a User
 	 //=============
-	 //@PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('CORE OPUS')")
 	 @RequestMapping(value = "/user", method = RequestMethod.DELETE)
 	 public ResponseEntity<Response> deleteUser(@RequestParam("userId") Long userId) throws ServiceException {
 		 Response response = new Response();
@@ -272,7 +259,9 @@ public class UserController {
 	  //Update a User
 	  //=============
 	  private  Set<Role> mapRoles(Set<Role> roles) {
-		return roles.stream().map(FunctionWithThrowable.castFunctionWithThrowable(role-> roleService.findRole(role.getId()))).collect(Collectors.toSet());
+		  if (Optional.ofNullable(roles).isPresent())
+		    return roles.stream().map(FunctionWithThrowable.castFunctionWithThrowable(role-> roleService.findRole(role.getId()))).collect(Collectors.toSet());
+		  else return new HashSet<Role>();
 	  }
 
 

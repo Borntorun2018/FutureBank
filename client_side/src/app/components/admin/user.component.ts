@@ -28,44 +28,15 @@ export class UserComponent implements OnInit {
      ngOnInit() {
         this.loading = true;
         this.message = "Please wait - loading data";
-         
-         this.route.params
+        this.route.params
         .switchMap((params: Params) => this.usersService.getUser(+params['id']))
-        .subscribe(data => {this.user = data.users.content[0];
-              
-            
-/**            
-accountNONExpired:1
-accountNONLocked:1
-age:33
-creationDate:1543449600000
-creationUser:null
-credentialsNONExpired:1
-email:"Mary.Harrow@eBusiness.uk"
-enabled:1
-expiryTime:null
-forenames:null
-homeTelephoneNo:null
-id:1
-images:[]
-lastPasswordResetDate:1563577200000
-mobileTelephoneNo:null
-roles:(2) [{…}, {…}]
-salary:3456
-surname:null
-terminationDate:null
-token:null
-userRemovedDisplayedImages:false
-username:"Mary.Harrow@eBusiness.uk"         
- **/           
-           
-            
-                            });
+        .subscribe((data:any) => {this.user = data.users.content[0];
+       });
      }
    
   save(): void {
       debugger;
-    this.usersService.updateUser(this.user)
+    this.usersService.updateUser(this.user).toPromise()
       .then(() => this.goBack());
   }  
     
