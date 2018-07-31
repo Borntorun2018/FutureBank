@@ -62,9 +62,10 @@ public class UserController {
          
     @Autowired
     RoleService roleService;
-           
+        
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @RequestMapping(value="/user", method = RequestMethod.GET)
-    public ResponseEntity<UserResponse> listUser1()throws ServiceException {	
+    public ResponseEntity<UserResponse> listUser()throws ServiceException {	
     	UserResponse response = new UserResponse();
     	
     	try {
@@ -82,7 +83,7 @@ public class UserController {
     
     
     //Search for users
-     @PreAuthorize("hasAuthority('CORE OPUS')")
+     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	 @RequestMapping(value = "user/search", method = RequestMethod.POST)
 	 public ResponseEntity<UserResponse> search(@RequestBody UserRequestWrapper  request) throws ServiceException {	 	 
 		 log.debug(propertyService.getPropertyValue("info.inside.restful.userManagerController.search"));
@@ -114,7 +115,7 @@ public class UserController {
     
      //Get a User
 	 //==========
-	 @PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('ROLE_USER')")
 	 @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
 	 public ResponseEntity<UserResponse>  getUser(@PathVariable("id") Long id) throws ServiceException {	 
 		 log.debug(propertyService.getPropertyValue("info.exit.restful.userController.search"));		 
@@ -140,7 +141,7 @@ public class UserController {
     
     
      //Update User
-	 @PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('ROLE_USER')")
 	 @RequestMapping(value = "/user", method = RequestMethod.POST)
 	 public ResponseEntity<UserResponse>  updateUser(@RequestBody UserRoleRequestWrapper request) throws ServiceException {	
 		 
@@ -222,7 +223,7 @@ public class UserController {
 	 
 	 //Delete a User
 	 //=============
-	 @PreAuthorize("hasAuthority('CORE OPUS')")
+	 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	 @RequestMapping(value = "/user", method = RequestMethod.DELETE)
 	 public ResponseEntity<Response> deleteUser(@RequestParam("userId") Long userId) throws ServiceException {
 		 Response response = new Response();

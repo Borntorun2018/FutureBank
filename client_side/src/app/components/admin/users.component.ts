@@ -66,37 +66,16 @@ export class UsersComponent implements OnInit {
     
     
     public viewUser(user:User):void{
-      let link = ['/user', user.id];
-      this.router.navigate(link);
+      this.router.navigate(['/user',user.id,'view']);  
+    }
+    public updateUser(user:User):void{
+      this.router.navigate(['/user',user.id,'update']); 
     }
     
     
     
-    /**
-     public viewUser(user:User):void{
-         this.usersService.getUser(user.id)
-             .subscribe((data:any) => {
-                 debugger;
-                 console.log(data);
-                    //this.users= data.user;
-                 
-                    let link = ['/detail', hero.id];
-                    this.router.navigate(link);
-                 
-                    this.status == 'Succes';
-               }, error => {
-                  debugger;
-                 this.loading = false;
-                 this.error = error.message;
-                 this.status == 'Error';
-                 
-              });       
-          debugger;
-         console.log('Inside viewUser id: ' + user.id);
-     }
-    **/
     
-    
+     /**
      public updateUser(user:User):void{
          debugger;
          console.log('Inside edit User id: ' + user.id);
@@ -115,7 +94,9 @@ export class UsersComponent implements OnInit {
                  
               });              
      }
+    **/
     
+    /**
       public deleteUser(user:User):void{
          debugger;
          console.log('Inside deletUser id: ' + user.id);
@@ -134,5 +115,5 @@ export class UsersComponent implements OnInit {
                  
               });                   
      }
-     
+     **/
 }

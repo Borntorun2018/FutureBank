@@ -8,5 +8,6 @@ export class User {
         public password: string,
         public salary:   number,
         public age:      number
+       
         ){}
 }

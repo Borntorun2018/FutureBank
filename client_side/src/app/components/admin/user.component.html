@@ -2,11 +2,18 @@
   <h2>{{user.username}} User Details Page</h2>
   <div><label>id: </label>{{user.id}}</div>
   <div>
-    <label>name: </label>
+    <label>name:</label>
     <input [(ngModel)]="user.username" placeholder="username"/>
   </div>
 </div>
 <button (click)="goBack()">Back</button>
-<button (click)="save()">Save</button>
+<span  *ngIf="status === 'update'" > <button (click)="save()">Save</button></span>
+
+
+
+
+
+
+
  
  

@@ -28,6 +28,7 @@ export class UserComponent implements OnInit {
      ngOnInit() {
         this.loading = true;
         this.message = "Please wait - loading data";
+        this.status=this.route.snapshot.params['status'];
         this.route.params
         .switchMap((params: Params) => this.usersService.getUser(+params['id']))
         .subscribe((data:any) => {this.user = data.users.content[0];

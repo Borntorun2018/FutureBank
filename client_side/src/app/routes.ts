@@ -26,10 +26,10 @@ export const appRoutes: Routes = [
                                             { path: 'contactus',component: ContactusComponent },
                                             { path: 'registration', component: RegistrationComponent },
                                             { path: 'users', component: UsersComponent },
-                                            
-                                            
-                                            { path: 'user/:id', component: UserComponent },
-                                            
+                                           
+                                          
+                                            { path: 'user/:id/:status', component: UserComponent },
+                                           
                                            
                                             { path: 'logout', component: LogoutComponent},
                                             { path: 'not-found', component: PageNotFoundComponent },
