@@ -51,7 +51,7 @@ public class Image implements Serializable{
 	}
 		
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="OPERIMG_OPER_ID",referencedColumnName="OSTA_ID")
+	@JoinColumn(name="OPERIMG_OPER_ID",referencedColumnName="id")
 	@JsonIgnore
 	private User user;
 	 

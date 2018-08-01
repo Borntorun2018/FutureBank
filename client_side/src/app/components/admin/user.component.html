@@ -1,11 +1,43 @@
 <div *ngIf="user">
-  <h2>{{user.username}} User Details Page</h2>
-  <div><label>id: </label>{{user.id}}</div>
-  <div>
-    <label>name:</label>
-    <input [(ngModel)]="user.username" placeholder="username"/>
-  </div>
+ 
+  
+    <div class="container">
+	  <div class="panel panel-default">
+	  
+	  
+	    <div class="panel-heading">{{user.username}} User Details Page</div>
+	    
+	    
+          <label for="email">Email address:</label>
+           <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email"/>
+        
+           <label for="pwd">Password:</label>
+           <input type="password" class="form-control" id="pwd" name="passowrd" [(ngModel)]="password"/>
+  	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    <!-- 
+	    <div class="panel-body">
+	       <output style="color:white;background:black;" value="User:"/>
+	       <output style="color:blue;background:black;" value="{user.username}"/>
+		   <div class="large-2 columns">&nbsp;</div>
+		   <output style="color:white;background:black" value="Forename:"/>
+		   <h:outputText style="color:blue;background:black" value="{user.forename}"/>
+		   <div class="large-2 columns">&nbsp;</div>
+		   <output style="color:white;background:black" value="Surname:"/>
+		   <output style="color:blue;background:black" value="{user.surname}"/>   
+	    </div>
+	    -->
+	    
+	  </div>
+    </div>
+
 </div>
+
 <button (click)="goBack()">Back</button>
 <span  *ngIf="status === 'update'" > <button (click)="save()">Save</button></span>
 

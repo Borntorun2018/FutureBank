@@ -28,12 +28,12 @@ public class UserSpecificationBuilder {
 	              predicates.add(cb.equal(cb.upper(root.get("email")), user.getEmail().toUpperCase()));
 	          }
 	          
-	          if (!StringUtil.isEmpty(user.getHomeTelephoneNo())) {
-	              predicates.add(cb.equal(root.get("homeTelephoneNo"), user.getHomeTelephoneNo()));
+	          if (!StringUtil.isEmpty(user.getHomePhoneNo())) {
+	              predicates.add(cb.equal(root.get("homePhoneNo"), user.getHomePhoneNo()));
 	          }
 	          
-	          if (!StringUtil.isEmpty(user.getMobileTelephoneNo())) {
-	              predicates.add(cb.equal(root.get("mobileTelephoneNo"), user.getMobileTelephoneNo()));
+	          if (!StringUtil.isEmpty(user.getMobilePhoneNo())) {
+	              predicates.add(cb.equal(root.get("mobilePhoneNo"), user.getMobilePhoneNo()));
 	          }
 	          
 	          if (user.getTerminationDate() !=null) {

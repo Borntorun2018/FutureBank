@@ -177,8 +177,8 @@ public class UserController {
 				 databaseUser.get().setForenames(user.getForenames());
 				 databaseUser.get().setSurname(user.getSurname());
 				 databaseUser.get().setEmail(user.getEmail());
-				 databaseUser.get().setHomeTelephoneNo(user.getHomeTelephoneNo());
-				 databaseUser.get().setMobileTelephoneNo(user.getMobileTelephoneNo());
+				 databaseUser.get().setHomePhoneNo(user.getHomePhoneNo());
+				 databaseUser.get().setMobilePhoneNo(user.getMobilePhoneNo());
 				 databaseUser.get().setPassword(user.getPassword());
 				 databaseUser.get().setTerminationDate(user.getTerminationDate());
 			 			 
