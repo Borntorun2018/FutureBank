@@ -1,49 +1,204 @@
+ <style type="text/css">
+   .row.extra-left-padding{
+      margin-left: 0px;
+    }
+    .row.extra-bottom-padding{
+      margin-bottom: 20px;
+    }
+</style> 
+
+
+ <!-- Start of Left Side view -->
+<div class="row">
+  <div class="col-sm-2"> 
+     <!-- Position arrow at top of this column --> 
+     <div (click)="goBack()" role="button" tabindex="0"><i class="fa fa-arrow-circle-o-left icon_website" ></i>
+     <span class="text_website">Back</span></div>
+  </div> <!-- End of <div class="col-sm-2">       -->
+   <!-- End of Left Side view --> 
+
+
+<!-- Middle bit containing user details -->
+<div class="container">
+
+ <div class="panel panel-default">
+    
+
+
 <div *ngIf="user">
- 
+    <div class="col-sm-10"> 
+    
+    <div class="row">
+			<div class="col-sm-12">
+		       <span style="color: red; font-size:large; font-weight: bold;">{{errorMsg}}</span>
+			</div>
+	</div>  
+	<div class="row main">
+			
+		  <div class="control-group">
+		      <div class="cols-sm-12">
+		          <div *ngIf="status == 'Succes'">
+			          <div class="alert alert-success fade in">
+  							<strong>Success!</strong> {{message}}
+					  </div>
+				  </div>
+                  <div *ngIf="status == 'Error'">					          
+					 <div class="alert alert-danger fade in">
+			           <strong>Error!</strong> {{message}}
+			         </div>			          
+		          </div>
+		      </div>
+          </div> <!-- <div class="control-group"> -->			
+			
+			
+	
+	            	            
+	            <!-- Middle centre displaying the User Details  -->
+				<div class="main-login main-center">
+				    
+				    <div class="panel-title text-center">
+	               		<h2 class="title">
+	               		    <span class="text_headings_website">{{userDetailsHeading}}</span>
+	               		</h2>
+	               		
+	               	</div>
+				    
+					<div class="cols-sm-10">
+						
+						
+						<div class="control-group">
+							<label for="id" class="cols-sm-2 control-label">
+							    <span class="control-group-addon"><i class="fa fa-key fa  icon_website"></i></span>
+							    <span class="text_website">Id</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+                                    <input type="text" disabled="{{isDisabled}}" class="form-control"  placeholder="Id"  [(ngModel)]="user.id"  />
+ 								</div>
+							</div>
+							
+						</div>
+						
+						
+						
+						<div class="control-group">
+							<label for="forename" class="cols-sm-2 control-label">
+							    <span class="control-group-addon"><i class="fa fa-user fa  icon_website"></i></span>
+							    <span class="text_website">Forenames</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+                                    <input type="text" disabled="{{isDisabled}}" class="form-control"  placeholder="Your Forenames"  [(ngModel)]="user.forenames"/>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="control-group">
+							<label for="surname" class="cols-sm-2 control-label">
+							   <span class="control-group-addon"><i class="fa fa-user fa  icon_website"></i></span>
+							   <span class="text_website">Surname</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+                                    <input type="text" disabled="{{isDisabled}}" class="form-control"   placeholder="Your Surname"  [(ngModel)]="user.surname"/>
+								</div>
+							</div>
+						</div>
+										
+
+						<div class="control-group">
+							<label for="email" class="cols-sm-2 control-label">
+							    <span class="control-group-addon"><i class="fa fa-envelope fa  icon_website"></i></span>
+							    <span class="text_website">Email</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+									<input type="text" disabled="{{isDisabled}}" class="form-control" name="email" id="email"  placeholder="Your Email"  [(ngModel)]="user.email"/>
+								</div>
+							</div>
+						</div>
+
+
+				       <div class="control-group">
+							<label for="telephone" class="cols-sm-2 control-label">
+							   <span class="control-group-addon"><i class="fa fa-phone-square fa  icon_website"></i></span>
+							   <span class="text_website">Home Phone No</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+									<input type="text" disabled="{{isDisabled}}" class="form-control" name="homePhoneNo" id="homePhoneNo"  placeholder="Home Phone No"  [(ngModel)]="user.homePhoneNo"/>
+								</div>
+							</div>
+						</div>
+
+                      <div class="control-group">
+							<label for="password" class="cols-sm-2 control-label">
+							   <span class="control-group-addon"><i class="fa fa-key fa  icon_website" ></i></span>
+							   <span class="text_website">Password</span>
+							</label>
+							<div class="cols-sm-6">
+								<div class="control-group">
+									<input type="text" disabled="{{isDisabled}}" class="form-control" name="password" id="password"  placeholder="Your Password"  [(ngModel)]="user.password"/>
+								</div>
+							</div>
+						</div>
+												
+	
+                        
+                        <br/>
+                   
+
+                  </div>
+                  <div class="cols-sm-2"></div>
+				</div>
+				<!-- End of Middle centre displaying the User Details  -->
+			
+   </div> <!--   <div class="row main"> -->
+   </div>	
+	</div>	
+ <br/>    	
+                    
+
+   
+   
+ </div>  
+     
+</div> <!-- <div class="container"> -->
+<!-- End of Middle bit containing user details -->
+
+</div> <!-- row -->
+
+
+<style>
+
+.p{
+display:block;
+width:99%;
+margin: auto 0;
+
+background-color:yellow;
+
+}
+
+.block1{
+  with:50%;
+  float:left;
   
-    <div class="container">
-	  <div class="panel panel-default">
-	  
-	  
-	    <div class="panel-heading">{{user.username}} User Details Page</div>
-	    
-	    
-          <label for="email">Email address:</label>
-           <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email"/>
-        
-           <label for="pwd">Password:</label>
-           <input type="password" class="form-control" id="pwd" name="passowrd" [(ngModel)]="password"/>
-  	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    <!-- 
-	    <div class="panel-body">
-	       <output style="color:white;background:black;" value="User:"/>
-	       <output style="color:blue;background:black;" value="{user.username}"/>
-		   <div class="large-2 columns">&nbsp;</div>
-		   <output style="color:white;background:black" value="Forename:"/>
-		   <h:outputText style="color:blue;background:black" value="{user.forename}"/>
-		   <div class="large-2 columns">&nbsp;</div>
-		   <output style="color:white;background:black" value="Surname:"/>
-		   <output style="color:blue;background:black" value="{user.surname}"/>   
-	    </div>
-	    -->
-	    
-	  </div>
-    </div>
-
-</div>
-
-<button (click)="goBack()">Back</button>
-<span  *ngIf="status === 'update'" > <button (click)="save()">Save</button></span>
+  background-color:red;
+  
+}
 
 
+.block1{
+  with:50%;
+  float:left;
+  
+  background-color:blue;
+  
+}
 
-
+</style>
 
 
 

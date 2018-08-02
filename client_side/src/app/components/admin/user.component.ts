@@ -19,9 +19,11 @@ export class UserComponent implements OnInit {
     @Input() user: User;
     loading = false;
     
-    error: any;
+    errorMsg: any;
     message: any;
     status: any;
+    userDetailsHeading: any;
+    isDisabled: boolean= false;;
     
         constructor(private  usersService: UsersService, private route: ActivatedRoute,private location: Location ) {}
          
@@ -29,9 +31,14 @@ export class UserComponent implements OnInit {
         this.loading = true;
         this.message = "Please wait - loading data";
         this.status=this.route.snapshot.params['status'];
+         if (this.status==='view')this.userDetailsHeading="View User Details";
+         else this.userDetailsHeading="Edit User Details";
+         
         this.route.params
         .switchMap((params: Params) => this.usersService.getUser(+params['id']))
-        .subscribe((data:any) => {this.user = data.users.content[0];
+        .subscribe((data:any) => {
+            debugger;
+            this.user = data.users.content[0];
        });
      }
    
