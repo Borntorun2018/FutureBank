@@ -22,21 +22,49 @@ export class AuthenticationService {
     private permissionsService: NgxPermissionsService
   ) { }
 
-     
   login(username: string, password: string): Observable<boolean> {
     const credentials = {username: username, password: password};
-     return this.http.post(this.loginUrl, credentials, {headers: this.headers})
+      
+      
+    return this.http.post(this.loginUrl, credentials, {headers: this.headers})
           .map((response: any) => {  
-               let token = response.token.token;
-               if (token) {
-                 this.token.saveToken(token);
-   
-                 debugger;
-                 window.sessionStorage.setItem("USER_NAME",response.user.forenames); 
-                 window.sessionStorage.setItem("USER",JSON.stringify(response.user));
-                    
-                 let perms: any=this.token.getUsernameAuthority();
-                 for(let i=0; i<perms.length; i++){
+           //Setup the users token    
+          debugger;
+          let token = response.token;
+          //let user = response.user;    
+          if (token) {
+               this.token.saveToken(token);
+              
+              /**
+            let jwtData = token.split('.')[1]
+            let decodedJwtJsonData = window.atob(jwtData)
+            let decodedJwtData = JSON.parse(decodedJwtJsonData)
+            
+            let isAdmin = decodedJwtData.admin
+            
+            console.log('jwtData: ' + jwtData)
+            console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
+            console.log('decodedJwtData: ' + decodedJwtData)
+            console.log('Is admin: ' + isAdmin)
+              
+              **/
+              
+              
+              
+              
+              
+              
+               //var parsedToken = this.token.decodeToken("str_access_token");
+              
+               debugger;          
+               //console.log("Username="+parsedToken.upn);
+               window.sessionStorage.setItem("USER_NAME","RICHARD");           
+                let perms: any=this.token.getUsernameAuthority();
+                //let perms: any=user.roles;
+
+                //Setup the users permissions
+                for(let i=0; i<perms.length; i++){
+                   //this.permissionsService.addPermission(perms[i].name);  
                    this.permissionsService.addPermission(perms[i].authority);  
                  }
              return true;
@@ -50,9 +78,11 @@ export class AuthenticationService {
 
   //Spring security will handle the backen logout
   public logout(): Observable<boolean> {
-       return this.http.post(this.logoutUrl,{headers: this.headers})
+      debugger;
+      //return this.http.get(this.logoutUrl)
+      return this.http.post(this.logoutUrl,{headers: this.headers})
                  .map((response: any) => {
-                     //debugger;
+                     debugger;
                      this.token.signOut();
                      this.permissionsService.flushPermissions();
                      return true;

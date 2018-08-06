@@ -8,14 +8,9 @@
 </style> 
 
 
+
  <!-- Start of Left Side view -->
 <div class="row">
-  <div class="col-sm-2"> 
-     <!-- Position arrow at top of this column --> 
-     <div (click)="goBack()" role="button" tabindex="0"><i class="fa fa-arrow-circle-o-left icon_website" ></i>
-     <span class="text_website">Back</span></div>
-  </div> <!-- End of <div class="col-sm-2">       -->
-   <!-- End of Left Side view --> 
 
 
 <!-- Middle bit containing user details -->
@@ -168,6 +163,26 @@
 <!-- End of Middle bit containing user details -->
 
 </div> <!-- row -->
+
+<div class="row extra-left-padding">
+ <div class="cols-sm-3"><a (click)="goBack()"     style="color:white;font-weight:bold"     class="btn btn-small btn-success">Back</a></div>
+ <div class="cols-sm-6">&nbsp;</div>
+ <div *ngIf="status == 'update'" class="cols-sm-3">
+      <a (click)="save()"     style="color:white;font-weight:bold"     class="btn btn-small btn-info">Save</a>
+ </div>
+</div>
+
+
+
+
+  
+
+
+
+
+
+
+
 
 
 <style>

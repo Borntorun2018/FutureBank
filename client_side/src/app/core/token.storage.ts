@@ -23,9 +23,53 @@ export class TokenStorage {
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }
-      
+     
+ //   JWTAuth::toUser(your_token_here);
+    
+  
+
+ private urlBase64Decode(str: string) {
+   let output = str.replace(/-/g, '+').replace(/_/g, '/');
+   switch (output.length % 4) {
+               case 0: { break; }
+               case 2: { output += '=='; break; }
+               case 3: { output += '='; break; }
+               default: {
+                   throw 'Illegal base64url string!';
+               }
+    }
+   return decodeURIComponent(encodeURI (window.atob(output)));
+ }   
+ public decodeToken(token: string) {
+     //debugger;
+            let parts = token.split('.');
+            if (parts.length !== 3) {
+                throw new Error('JWT must have 3 parts');
+            }
+            let decoded = this.urlBase64Decode(parts[1]);
+            if (!decoded) {
+                throw new Error('Cannot decode the token');
+            }
+            return JSON.parse(decoded);
+ }   
+   /**  
+  public getUserInfo() {
+  let token = this.getToken();
+  let payload;
+  if (token) {
+    payload = token.split(".")[1];
+    payload = window.atob(payload);
+    return JSON.parse(payload);
+  } else {
+    return null;
+  }
+} **/
+    
+  
+    
   public getUsernameAuthority(): string[] {
           try{
+             // debugger;
             let token =  this.getToken();
             let jwtData = token.split('.')[1]
             let decodedJwtJsonData = window.atob(jwtData)
@@ -44,12 +88,11 @@ export class TokenStorage {
 
 
     public getUsername(): string {
-        //Should be able to get the name from the token
-        //return  window.sessionStorage.getItem(USER_NAME); 
-        return "Maureen";
+       // debugger;
+       //var obj =this.getUserInfo();
+        return "";
     }
-   
-    public isTokenExpired(): boolean {
+       public isTokenExpired(): boolean {
         try{
             if (this.getTokenExpirationDate(this.getToken())==null) return true; //token expired
             //Set todays date

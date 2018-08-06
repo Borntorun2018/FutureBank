@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.eBusiness.model.AuthToken;
 import com.eBusiness.persist.entity.user.User;
 
 
@@ -15,6 +16,15 @@ public class SecurityUser implements UserDetails{
 	private Collection<GrantedAuthority> authorities;
 	
 	private User user;
+	private AuthToken token;
+
+	public AuthToken getToken() {
+		return token;
+	}
+
+	public void setToken(AuthToken token) {
+		this.token = token;
+	}
 
 	public SecurityUser(User user) {
 	  this.user=user;	

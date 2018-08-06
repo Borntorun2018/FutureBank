@@ -7,3 +7,10 @@
   color: #c2f5d3;  
   font-weight: bold;
 }
+
+.row.extra-left-padding{
+  margin-left: 0px;
+}
+.row.extra-bottom-padding{
+  margin-bottom: 20px;
+}

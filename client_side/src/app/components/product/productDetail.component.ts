@@ -3,8 +3,6 @@ import { routerTransition } from '../../router.animations';
 import { FileHolder,UploadMetadata} from 'angular2-image-upload';
 
 
-//https://aberezkin.github.io/ng2-image-upload/#/readme
-//https://www.npmjs.com/package/ng2-fancy-image-uploader
 const img = '/assets/images/badboy.jpg';  //default
 const URL ='C://uploadedImages'; //Location of images
 
@@ -52,16 +50,7 @@ export class ProductDetailComponent {
 
       onRemoved(file: FileHolder) {
           //debugger;
-    /**
-     https://segmentfault.com/a/1190000008761862
-     console.log(event);
-    let index = this.file.indexOf(event.file);
-    if( index > -1) {
-      this.file.splice(index, 1);
-    }
-    console.log(this.file);
-    
-    **/
+ 
     this.imageSource="";
          console.log("onRemoved "+ file);
       }

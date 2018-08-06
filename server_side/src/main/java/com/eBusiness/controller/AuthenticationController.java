@@ -53,18 +53,27 @@ public class AuthenticationController {
     
     @RequestMapping(value = "/login/auth", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    //public ResponseEntity<SecurityUser> login(@RequestBody LoginUser loginUser) throws AuthenticationException {
     	System.out.println("Inside register login user "+loginUser.getUsername());
     	authenticate(loginUser.getUsername(), loginUser.getPassword());
      	final UserDetails userDetails = userDetailsService.loadUserByUsername(loginUser.getUsername());
      	
+     	final SecurityUser securityUser =(SecurityUser)userDetails;
+     	
+     	
+     	
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthToken(token));
-       
+     	//final String token = jwtTokenUtil.generateToken(securityUser);
+     	securityUser.setToken(new AuthToken(token));
+     	
+        //return ResponseEntity.ok(new AuthToken(token));
+     	return ResponseEntity.ok(securityUser);
     }
   
        
     @RequestMapping(value = "/logout/auth", method = RequestMethod.POST)
     public ResponseEntity<String> logout(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    //public ResponseEntity<String> logout() throws AuthenticationException {	
     	Optional<Authentication> auth=	Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication());
     	if (auth.isPresent()) {
     		SecurityContextHolder.getContext().setAuthentication(null);

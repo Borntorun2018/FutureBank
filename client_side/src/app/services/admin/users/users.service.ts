@@ -24,7 +24,7 @@ export class UsersService {
   }
    
   getUser(id: number): Observable<User> {
-      debugger;
+      //debugger;
       return this.http.get(this.userUrl+"/"+id)
                         .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -34,7 +34,7 @@ export class UsersService {
   }
         
   updateUser(user: User): Observable<User> {
-      debugger;
+      //debugger;
        return this.http.post(this.userUrl, {user: user})
                         .map((response: Response) => response)
                        .catch((err: Response) => {

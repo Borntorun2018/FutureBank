@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { Location }                 from '@angular/common';
-
-//import { Router } from '@angular/router';
 import { ActivatedRoute, Params }   from '@angular/router';
 import { UsersService } from './../../services/admin/users/users.service';
 import { User }         from './../../services/admin/users/user';
@@ -23,7 +21,7 @@ export class UserComponent implements OnInit {
     message: any;
     status: any;
     userDetailsHeading: any;
-    isDisabled: boolean= false;;
+    isDisabled: boolean= false;
     
         constructor(private  usersService: UsersService, private route: ActivatedRoute,private location: Location ) {}
          

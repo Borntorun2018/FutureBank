@@ -31,6 +31,10 @@ import { UserComponent } from "./components/admin/user.component";
 
 import { ContactusComponent } from "./components/contactus/contactus.component";
 import { HomeComponent } from './components/home/home.component';
+
+
+
+
 import { LoginComponent } from "./components/login/login.component";
 import { LogoutComponent } from "./components/logout/logout.component";
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
@@ -47,6 +51,7 @@ import { TokenStorage } from './core/token.storage';
 import { BrowserSideAuthGuard } from './services/security/browserside-auth-guard.service';
 import { ServerSideAuthGuardService } from './services/security/serverside-authentication.service';
 import { AuthenticationService } from './services/security/authentication.service';
+import { LoggedinService } from './services/admin/users/usersloggedin.service';
 
 
 import { ZoomableDirective }  from './components/product/zoomable.directive.js';
@@ -107,6 +112,7 @@ export function createTranslateLoader(http: HttpClient) {
       
   providers: [
     AuthenticationService,
+    LoggedinService,  
     TokenStorage,
     BrowserSideAuthGuard,
     ServerSideAuthGuardService,

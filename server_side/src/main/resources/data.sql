@@ -22,17 +22,49 @@ Insert into OPUS_ROLE
    (2, 'ROLE_USER', 'ROLE USER',  'FUTUREBANK');
 
     
-INSERT INTO User (id, username, password, salary, age, email, enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, creationDate, lastPasswordResetDate) 
-VALUES (1, 'Mary.Harrow@eBusiness.uk', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 3456, 33,'Mary.Harrow@eBusiness.uk', 1,1,1,1,TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),TO_DATE('07/20/2019 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+INSERT INTO User (id, forenames, surname, 
+                  username, homePhoneNo, password, 
+                  salary, age, email, 
+                  enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, 
+                  creationDate) 
+VALUES (1, 'Mary', 'Harrow', 
+        'Mary.Harrow@eBusiness.uk', '01706640431', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        3456, 33,'Mary.Harrow@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
 
-INSERT INTO User (id, username, password, salary, age, email, enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, creationDate) 
-VALUES (2, 'Richard.Lucas@eBusiness.uk', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 3456, 33,'Richard.Lucas@eBusiness.uk', 1,1,1,1,TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+INSERT INTO User (id, forenames, surname, 
+                  username, homePhoneNo, password, 
+                  salary, age, email, 
+                  enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, 
+                  creationDate) 
+VALUES (2, 'Richard', 'Lucas', 
+        'Richard.Lucas@eBusiness.uk', '01706640432', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        3456, 33,'Richard.Lucas@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
 
-INSERT INTO User (id, username, password, salary, age, email, enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, creationDate) 
-VALUES (3, 'Tom.Harrow@eBusiness.uk', '$2a$04$PCIX2hYrve38M7eOcqAbCO9UqjYg7gfFNpKsinAxh99nms9e.8HwK', 7823, 23,'Tom.Harrow@eBusiness.uk', 1,1,1,1,TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+INSERT INTO User (id, forenames, surname, 
+                  username, homePhoneNo, password, 
+                  salary, age, email, 
+                  enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, 
+                  creationDate) 
+VALUES (3, 'Tom', 'Harrow', 
+        'Tom.Harrow@eBusiness.uk','01706640472', '$2a$04$PCIX2hYrve38M7eOcqAbCO9UqjYg7gfFNpKsinAxh99nms9e.8HwK', 
+        7823, 23,'Tom.Harrow@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
 
-INSERT INTO User (id, username, password, salary, age, email, enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, creationDate) 
-VALUES (4, 'Adam.Harrow@eBusiness.uk', '$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 4234, 45,'Adam.Harrow@eBusiness.uk', 1,1,1,1,TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+INSERT INTO User (id, forenames, surname, 
+                  username, homePhoneNo, password, 
+                  salary, age, email, 
+                  enabled, accountNONLocked, accountNONExpired, credentialsNONExpired, 
+                  creationDate) 
+VALUES (4, 'Adam', 'Harrow', 
+        'Adam.Harrow@eBusiness.uk', '01706640732','$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        4234, 45,'Adam.Harrow@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
 COMMIT;
 
 Insert into OPUS_STAFF_ROLE_LINK
