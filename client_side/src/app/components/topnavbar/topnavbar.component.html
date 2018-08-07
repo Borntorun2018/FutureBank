@@ -44,15 +44,12 @@
 		           <span class="glyphicon glyphicon-log-in icon_website">login</span>
 		    </a>
 		</div>
-		
-	 <!-- 	<div *ngIf="user"> -->
-			<div *ngxPermissionsOnly="['ROLE_ADMIN', 'ROLE_USER']">
-			     <i class="fa fa-user icon_website"><span style="color: white;">Hello: {{user.forenames}}</span></i>
-			    <a  [routerLink]="['/logout']">
-			           <span class="glyphicon glyphicon-log-out icon_website">logout</span>
-			    </a>
-			</div>
-	 <!-- 	</div> -->
+		<div *ngxPermissionsOnly="['ROLE_ADMIN', 'ROLE_USER']">
+		     <i class="fa fa-user icon_website"><span style="color: white;">Hello: {{username}}</span></i>
+		    <a  [routerLink]="['/logout']">
+		           <span class="glyphicon glyphicon-log-out icon_website">logout</span>
+		    </a>
+		</div>
 	    
  	</form>
          

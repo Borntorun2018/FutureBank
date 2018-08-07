@@ -14,7 +14,6 @@ export class UsersService {
    constructor(private http: HttpClient) {}
     
   getAllUsers(): Observable<Object> {
-      //debugger;
        return this.http.get(this.userUrl)
                        .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -24,7 +23,6 @@ export class UsersService {
   }
    
   getUser(id: number): Observable<User> {
-      //debugger;
       return this.http.get(this.userUrl+"/"+id)
                         .map((response: Response) => response)
                        .catch((err: Response) => {
@@ -34,8 +32,7 @@ export class UsersService {
   }
         
   updateUser(user: User): Observable<User> {
-      //debugger;
-       return this.http.post(this.userUrl, {user: user})
+        return this.http.post(this.userUrl, {user: user})
                         .map((response: Response) => response)
                        .catch((err: Response) => {
                             console.log((err.statusText || "Error occurred attempting to update a user"));
@@ -45,7 +42,6 @@ export class UsersService {
     
     
   deleteUser(id: number): Observable<Object> {
-      //debugger;
       return this.http.delete(this.userUrl+"/"+id)
                         .map((response: Response) => response)
                        .catch((err: Response) => {

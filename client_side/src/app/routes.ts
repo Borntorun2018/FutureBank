@@ -7,6 +7,7 @@ import { AccessDeniedComponent } from "./components/access-denied/access-denied.
 import { UsersComponent } from "./components/admin/users.component";
 import { UserComponent } from "./components/admin/user.component";
 
+import { AppComponent } from "./app.component";
 
 import { ContactusComponent } from "./components/contactus/contactus.component";
 import { ProductDetailComponent } from "./components/product/productDetail.component";
@@ -20,6 +21,7 @@ import { BrowserSideAuthGuard } from "./services/security/browserside-auth-guard
 export const appRoutes: Routes = [
                                    {path: '', component: LayoutComponent,
                                       children: [
+                                            { path: 'root', component: AppComponent },
                                             { path: 'home', component: HomeComponent },
                                             { path: 'login',  component: LoginComponent },   
                                             { path: 'aboutus', component: AboutComponent },

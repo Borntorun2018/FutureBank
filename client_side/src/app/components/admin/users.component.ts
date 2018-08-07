@@ -37,7 +37,7 @@ export class UsersComponent implements OnInit {
          this.usersService.getAllUsers()
              .subscribe((data:any) => {
                  //debugger;
-                 console.log(data);
+                 //console.log(data);
                     this.users= data.users.content;
                     this.status == 'Succes';
                }, error => {

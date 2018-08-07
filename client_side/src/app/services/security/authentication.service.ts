@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter, Input, Output} from '@angular/core'; 
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TokenStorage } from '../../core/token.storage';
 import { JwtHelper } from 'angular2-jwt';
@@ -10,6 +11,8 @@ import { User }         from '../admin/users/user';
 
 @Injectable()
 export class AuthenticationService {
+   @Output() getLoggedInName: EventEmitter<any> = new EventEmitter();
+          
   private loginUrl = 'http://localhost:8080/login/auth';
   private logoutUrl ='http://localhost:8080/logout/auth';
     
@@ -30,11 +33,8 @@ export class AuthenticationService {
                let token = response.token.token;
                if (token) {
                  this.token.saveToken(token);
-   
-                 debugger;
-                 window.sessionStorage.setItem("USER_NAME",response.user.forenames); 
-                 window.sessionStorage.setItem("USER",JSON.stringify(response.user));
-                    
+                 this.getLoggedInName.emit(response.user.forenames); 
+                 //window.sessionStorage.setItem("USER",JSON.stringify(response.user));
                  let perms: any=this.token.getUsernameAuthority();
                  for(let i=0; i<perms.length; i++){
                    this.permissionsService.addPermission(perms[i].authority);  
@@ -48,11 +48,10 @@ export class AuthenticationService {
       }); 
    }
 
-  //Spring security will handle the backen logout
-  public logout(): Observable<boolean> {
+    public logout(): Observable<boolean> {
        return this.http.post(this.logoutUrl,{headers: this.headers})
                  .map((response: any) => {
-                     //debugger;
+                     this.getLoggedInName.emit('');
                      this.token.signOut();
                      this.permissionsService.flushPermissions();
                      return true;

@@ -18,11 +18,8 @@ export class ProductDetailComponent {
     imageSource = img;
     uploadedimages: Image[] = [];
       
- 
-    //imageUploaded(event:any) {
     imageUploaded(file: FileHolder) {
-       // debugger;
-        console.log(event);
+         console.log(event);
         this.imageSource=file.src;
         //this.uploadedimages.push(new Image(1,file.src,"temp"));
         //this.file.push(event.file);
