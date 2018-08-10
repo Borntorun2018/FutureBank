@@ -39,13 +39,14 @@ export class UsersComponent implements OnInit {
                  //debugger;
                  //console.log(data);
                     this.users= data.users.content;
-                    this.status == 'Succes';
+                    this.status = 'Succes';
+                    this.message ='Successful user search';
                }, error => {
                   //debugger;
                  this.loading = false;
                  this.error = error.message;
-                 this.status == 'Error';
-                 
+                 this.status = 'Error';
+                 this.message ='System failure occurred during attempted user search';
               });
      }
      
