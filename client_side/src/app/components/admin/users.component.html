@@ -1,46 +1,40 @@
-<p>
-  User Search Status: {{error}}
-</p>
+
 
   
     <div class="col-sm-9">  
       
+       <div class="row">
+         <div class="text-center, text_headings_website">User Search Page</div>
+	   </div>	
+      
+      
 	  <div class="row">		
 		  <div class="control-group">
-		     <div class="cols-sm-12">
-			   <span class="text_headings_website">USER SEARCH</span>
-			  </div>
-		   </div>
-	   </div>      		  
-  
-  	   <div class="row">		
-		  <div class="control-group">
+	  
 		     <div class="cols-sm-12">
 			    <div ng-if="status == 'Succes'">
 				   <div class="alert alert-success fade in">
-					  <strong>Success!</strong> {{message}}
+					  <strong>Success user search:</strong> {{message}}
 					</div>
 			     </div>
 		         <div ng-if="status == 'Error'">					          
 					<div class="alert alert-danger fade in">
-				      <strong>Error!</strong> {{message}}
+				      <strong>UnSuccess user search:</strong> {{message}}
 				    </div>			          
 			     </div>
 			  </div>
 		   </div>
 	  </div>      		
-       
+        	   
       <div class="row">
 		   <div class="col-sm-12">
-		       <span style="color: #ffffff; font-weight: bold;">Records found: {{totalItems}}</span>
+		       <span class="text_website">Records found: {{totalItems}}</span>
 			</div>
 	  </div> 
 		
-	  <div class="row">
-			<div class="col-sm-8">
-			  <span style="color: black;  font-weight: bold;"> </span>
-			</div>
-			<div class="col-sm-4">
+	  <div class="row, padding_bottom_row">
+			
+			<div class="col-sm-12">
 			    <form class="form-inline">
 				  <div class="form-group">
 				        <input type="text" name="search" class="form-control" [(ngModel)]="filter" placeholder="Find"/>
@@ -80,12 +74,14 @@
 		         </tr>
 		      </thead>
 		     <tbody>
+		    
+		     
              <tr *ngFor="let user of users | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
-                   <td><span class="nowrap_website">{{i}}</span></td>
-                   <td><span class="nowrap_website">{{user.username}}</span></td>
-		           <td><span class="nowrap_website">{{user.password}}</span></td>
-                   <td><span class="nowrap_website">{{user.salary}}</span></td>
-		           <td><span class="nowrap_website">{{user.age}}</span></td>
+                   <td><span class="nowrap_website, text_website">{{i}}</span></td>
+                   <td><span class="nowrap_website, text_website">{{user.username}}</span></td>
+		           <td><span class="nowrap_website, text_website">{{user.password}}</span></td>
+                   <td><span class="nowrap_website, text_website">{{user.salary}}</span></td>
+		           <td><span class="nowrap_website, text_website">{{user.age}}</span></td>
 		           <td><a (click)="viewUser(user)"     style="color:white;font-weight:bold"     class="btn btn-small btn-success">View</a></td>
 		           <td><a (click)="updateUser(user)"   style="color:white;font-weight:bold"     class="btn btn-small btn-warning">Edit</a></td>	
               </tr>

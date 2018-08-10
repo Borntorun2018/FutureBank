@@ -8,6 +8,19 @@
   font-weight: bold;
 }
 
+.text_headings_website {
+  color: #c2f5d3;  
+  font-weight: bold;
+  font-size:18px;
+}
+
+.padding_bottom_row {
+  border-bottom: 12px solid transparent;
+}
+
+
+
+
 .row.extra-left-padding{
   margin-left: 0px;
 }
