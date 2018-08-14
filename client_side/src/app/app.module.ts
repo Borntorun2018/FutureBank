@@ -15,8 +15,10 @@ import { Ng2OrderModule } from 'ng2-order-pipe'; //importing the module
 import { NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { NgxPermissionsModule} from 'ngx-permissions';
 
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 
 
 import { AppComponent } from './app.component';

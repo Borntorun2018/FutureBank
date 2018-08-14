@@ -11,9 +11,10 @@
 
 
 
-
-
 Good websites
 https://academind.com/learn/angular/snippets/angular-image-upload-made-easy/
-https://www.codeproject.com/Articles/1228928/Client-and-Server-Side-Data-Filtering-Sorting-and
-https://embed.plnkr.co/V0tVti/
+
+https://www.telerik.com/kendo-angular-ui/components/grid/
+
+
+npm install @progress/kendo-theme-default/dist/all.css

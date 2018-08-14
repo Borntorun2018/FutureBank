@@ -1,15 +1,19 @@
 .icon_website {
- color: #76D7C4;
+ color: #0080ff;
  aria-hidden: true
 }
 
+.boarder_website{
+	color: #1a1a1a
+}
+
 .text_website {
-  color: #c2f5d3;  
+  color: #7a7171;  
   font-weight: bold;
 }
 
 .text_headings_website {
-  color: #c2f5d3;  
+  color: #7a7171;  
   font-weight: bold;
   font-size:22px;
 }
