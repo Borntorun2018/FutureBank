@@ -67,6 +67,29 @@ VALUES (4, 'Adam', 'Harrow',
         TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
 COMMIT;
 
+
+
+VALUES (5, 'Maria', 'Lucas', 
+        'Maria.Lucas@eBusiness.uk', '01706640732','$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        4234, 45,'Maria.Lucas@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+COMMIT;
+VALUES (6, 'David', 'Moloney', 
+        'David.Moloney@eBusiness.uk', '01706640732','$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        4234, 45,'David.Moloney@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+COMMIT;
+VALUES (7, 'Richie', 'Lucas', 
+        'Richie.Lucas@eBusiness.uk', '01706640732','$2a$04$I9Q2sDc4QGGg5WNTLmsz0.fvGv3OjoZyj81PrSFyGOqMphqfS2qKu', 
+        4234, 45,'Richie.Lucas@eBusiness.uk', 
+        1,1,1,1,
+        TO_DATE('11/29/2018 00:00:00', 'MM/DD/YYYY HH24:MI:SS'));
+COMMIT;
+
+
+
 Insert into OPUS_STAFF_ROLE_LINK
    (OSRL_ID, OSRL_OSTA_ID, OSRL_OROL_ID, OSRL_SOURCE_SYSTEM)
  Values

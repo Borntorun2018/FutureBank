@@ -33,11 +33,16 @@
  <div class="row, padding_bottom_row">
 	    <div class="col-sm-12">
 	       <div class="row">
-				<div class="col-sm-10"></div>
-				<div class="col-sm-2">
+				<div class="col-sm-8"></div>
+				<div class="col-sm-4">
 				    <form class="form-inline">
 					  <div class="form-group">
-					        <input type="text" name="search" class="form-control" [(ngModel)]="filter" placeholder="Find"/>
+					        <input type="text" 
+					               name="search" 
+					               class="form-control" 
+					               [(ngModel)]="filter"
+					               placeholder="Find"/>
+					               
 					        <i class="fa fa-search" style="font-size:24px;color:#ffffff; "></i>
 					   </div>
 					</form>
@@ -52,10 +57,15 @@
 		   <table class="table">
 		     <thead class="thead-inverse">
 		        <tr>
+		        
 					<th class="nowrap_website" (click)="sort('id')">
 					   <span class="text_website">ID</span>
-					   <span class="glyphicon sort-icon"  *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+					   <span class="glyphicon sort-icon"  
+					         *ngIf="key =='id'" 
+					         [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}">
+					   </span>
   					</th>
+  					 
 					<th class="nowrap_website" (click)="sort('username')">
 					    <span class="text_website">UserName</span>
 					    <span class="glyphicon sort-icon" style="color: white;" *ngIf="key =='username'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
@@ -72,6 +82,8 @@
 					   <span class="text_website">Age</span>
 					   <span class="glyphicon sort-icon" style="color: white;" *ngIf="key =='age'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 					</th>
+					
+					
 					<th></th>  
 		           <th></th>  					
 		         </tr>
@@ -79,7 +91,12 @@
 		     <tbody>
 		    
 		     
-             <tr *ngFor="let user of users | orderBy: key : reverse | filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+             <tr *ngFor="let user of users | 
+                             orderBy: key : reverse | 
+                             filter:filter | 
+                             paginate: { itemsPerPage: 5, currentPage: p }; 
+                             let i = index">
+                             
                    <td><span class="nowrap_website, text_website">{{i}}</span></td>
                    <td><span class="nowrap_website, text_website">{{user.username}}</span></td>
 		           <td><span class="nowrap_website, text_website">{{user.password}}</span></td>
@@ -87,10 +104,11 @@
 		           <td><span class="nowrap_website, text_website">{{user.age}}</span></td>
 		           <td><a (click)="viewUser(user)"     style="color:white;font-weight:bold"     class="btn btn-small btn-success">View</a></td>
 		           <td><a (click)="updateUser(user)"   style="color:white;font-weight:bold"     class="btn btn-small btn-dark">Edit</a></td>	
+		           
               </tr>
 		     </tbody>
 		     <div class="row">
-		        <div class="col-sm-6">
+		        <div class="col-sm-3">
 		             <pagination-controls [id]="config.id"
 		                         [maxSize]="maxSize"
 		                         [directionLinks]="directionLinks"
@@ -103,31 +121,13 @@
 		                         [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
 		                         (pageChange)="onPageChange($event)"></pagination-controls>
 				 </div>
-		          <div class="col-sm-6">
-		          	<label class="control">maxSize <input type="number" class="input" min="5" max="100" [(ngModel)]="maxSize"></label>
-		          </div>
-		      </div>
+			</div>	 
+		      
 		    </table>
-		   
+		    <div class="row">
+			  <div class="col-sm-8"></div>
+		      <div class="col-sm-4"><label class="control">Display <input type="number" class="input" min="5" max="100" [(ngModel)]="maxSize"/> Records</label></div>
+	        </div>
   </div>
 </div>
 
- 
-<div class="columns">
-    <div class="column is-one-third">
-        <label class="control">Filter items
-            <input type="text" class="input" placeholder="filter" [(ngModel)]="filter">
-        </label>
-    </div>
-    <div class="column">
-        <label class="control">itemsPerPage
-            <input type="number" class="input" min="0" [(ngModel)]="config.itemsPerPage">
-        </label>
-    </div>
-    <div class="column">
-        <label class="control">currentPage
-            <input type="number" class="input" min="0" [(ngModel)]="config.currentPage">
-        </label>
-    </div>
-  
-</div>

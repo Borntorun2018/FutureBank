@@ -8,6 +8,7 @@ import {NgxPaginationModule, PaginationInstance} from 'ngx-pagination';
 @Component({ 
     selector: 'app-users',
     templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css'],
     providers: [ UsersService ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -15,8 +16,11 @@ import {NgxPaginationModule, PaginationInstance} from 'ngx-pagination';
 export class UsersComponent implements OnInit {
    @Input('data') meals: string[] = [];
   
-    public filter: string = '';
-    public maxSize: number = 7;
+    public filter: string   = '';
+    public maxSize: number  = 7;
+    public key: string      = 'id';  //set default
+    public reverse: boolean = false;
+    
     public directionLinks: boolean = true;
     public autoHide: boolean = false;
     public responsive: boolean = false;
@@ -27,6 +31,13 @@ export class UsersComponent implements OnInit {
     message: any;
     status: any;
        
+    sort(key){
+      this.key = key;
+      this.reverse  = !this.reverse;
+      debugger;    
+    }
+    
+    
     constructor(public router: Router, 
                 private cd: ChangeDetectorRef,
                 public usersService : UsersService) {}
@@ -88,5 +99,5 @@ export class UsersComponent implements OnInit {
     public updateUser(user:User):void{
       this.router.navigate(['/user',user.id,'update']); 
     }
-    
+     
  }

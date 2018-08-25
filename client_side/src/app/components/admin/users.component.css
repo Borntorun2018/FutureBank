@@ -1,0 +1,4 @@
+thead>tr>th {
+    cursor: pointer;
+}
+.nowrap_website { white-space: nowrap; }
