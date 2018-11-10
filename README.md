@@ -1,3 +1,8 @@
+https://dzone.com/articles/file-upload-using-angular4microservice
+
+
+
+
 "# PRODUCT DEVELOPMENT" 
 1) Restructured the project - done
 2) CRUD user - working on

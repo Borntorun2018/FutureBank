@@ -1,0 +1,47 @@
+ <style>
+  img {
+  display: block;
+  }
+
+  .imgside{
+    margin-top: 10px;  
+  }
+
+.imgzoom{
+    margin-top: 10px;  
+    height: auto;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .uploadimg {
+        margin-top: 40px;
+  }
+      
+ 
+</style>
+
+  
+<div class="row">
+
+    <div class="col-sm-2">
+      <div *ngFor="let url of urls; let i = index">
+ 
+      <div *ngIf="i == 0"> 
+         <img style="max-width:100%;height: auto;" (click)="changeImage(i)" [src]='url' class='imgside'/>
+      </div>
+
+      <div *ngIf="i > 0"> 
+         <img style="max-width:100%;height: auto;" (click)="changeImage(i)" [src]='url' />
+      </div>
+
+         <br/>
+      </div> 
+      <input multiple type='file' (change)="onSelectFile($event)">   
+    </div>
+
+    <div class="col-sm-10">
+      <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='imgzoom'/>
+    </div>
+
+</div>

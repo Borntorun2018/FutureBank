@@ -1,0 +1,15 @@
+<div style="text-align:center">
+  <h1>
+    Demo: {{urls}}!
+    <input multiple type='file' (change)="onSelectFile($event)">
+  </h1>
+</div>
+
+<div *ngFor="let url of urls">
+  <div class="col-md-3 col-sm-6 mb-4">
+    <a href="#">
+      <img [src]="url" height="200">
+    </a>
+  <div>
+<div>
+

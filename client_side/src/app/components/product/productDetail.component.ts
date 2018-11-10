@@ -13,7 +13,7 @@ const URL ='C://uploadedImages'; //Location of images
     animations: [routerTransition()]
 })
 export class ProductDetailComponent {
-        
+         urls: Array<any>= [];
     dubugger;
     imageSource = img;
     uploadedimages: Image[] = [];
@@ -39,25 +39,42 @@ export class ProductDetailComponent {
     }
     
       onUploadFinished(file: FileHolder) {
-      
-          //debugger;
-          //this.uploadedimages.push(new Image(1,file.src,"temp"));
-          this.imageSource= file.src;
+      /**
+          file: File(143329) {name: "used-Wilson-juice5 dd-Tennis-racket-25_942_14-Feb-2016.png", 
+                              lastModified: 1455474060350, 
+                              lastModifiedDate: Sun Feb 14 2016 18:21:00 GMT+0000 (Greenwich Mean Time), 
+                              webkitRelativePath: "", 
+                              size: 143329, 
+                              pending: false
+                              src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaIA"
+
+          **/
+            debugger;
+            var reader = new FileReader();
+            console.log("file name:"+ file.file.name);
+            console.log("file src:"+ file.src);
+            reader.readAsDataURL(file.file);
+           reader.onload = (event) => { 
+              this.urls.push(event.target.result);  
+            }
+           this.imageSource= file.src;
        }
 
       onRemoved(file: FileHolder) {
-          //debugger;
- 
-    this.imageSource="";
-         console.log("onRemoved "+ file);
+          debugger;
+        this.imageSource="";
+        console.log("onRemoved "+ file);
       }
-
       onUploadStateChanged(state: boolean) {
-       //debugger;   
-      console.log("onUploadStateChanged "); 
+          debugger;
+        console.log("onUploadStateChanged "); 
       }   
     
+    disableSendButton(Event){
+        }
+        
  }  
+    
  class Image {
     id: number;
     src: string;

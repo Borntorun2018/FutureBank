@@ -15,6 +15,11 @@ import { ProfileComponent } from "./components/profile/profile.component";
 import { RegistrationComponent } from "./components/registration/registration.component";
 import { LayoutComponent } from './components/layout/layout.component';
 
+
+import { DemoComponent } from "./components/demo/demo.component";
+import { DemoComponent2 } from "./components/demo2/demo2.component";
+import { DemoComponent3 } from "./components/demo3/demo3.component";
+
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { BrowserSideAuthGuard } from "./services/security/browserside-auth-guard.service";
 
@@ -29,6 +34,10 @@ export const appRoutes: Routes = [
                                             { path: 'registration', component: RegistrationComponent },
                                             { path: 'users', component: UsersComponent },
                                            
+                                             { path: 'demo',component: DemoComponent },
+                                             { path: 'demo2',component: DemoComponent2 },
+                                             { path: 'demo3',component: DemoComponent3 },
+ 
                                           
                                             { path: 'user/:id/:status', component: UserComponent },
                                            

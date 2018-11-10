@@ -1,0 +1,138 @@
+import { Component } from '@angular/core';
+
+const img1 = '../../assets/images/1.jpeg';
+const img2 = '../../assets/images/2.jpeg';
+const img3 = '../../assets/images/3.jpeg';
+
+@Component({
+  selector: 'my-demo3',
+  styles: [`
+    img {
+      display: block;
+    }
+
+  
+
+.imgzoom {
+  margin-top: 50px;  
+  height: auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+
+ 
+
+.uploadimg {
+      margin-top: 40px;
+
+      width: 97px;
+      height: 145px;
+    }
+
+
+#RevWrapper {
+  
+        background-color: pink;
+ 
+}
+#RevWrapper2 {
+  
+        background-color: yellow;
+ 
+}
+
+  `],
+  template: `
+  
+<div id="RevWrapper" class="row">
+
+    <div class="col-sm-2">
+             <img style="max-width:100%;height: auto;" (click)="changeImage('img1')" [src]='imageSource1' class='img1'/>
+ <br>
+              <img style="max-width:100%;height: auto;" (click)="changeImage('img2')" [src]='imageSource2'/>
+ <br>
+            <img style="max-width:100%;height: auto;" (click)="changeImage('img3')" [src]='imageSource3'/>
+ 
+    </div>
+<div class="col-sm-10">
+  <img [zoomable]='zoomOptions' [zoomableSrc]='imageSource' [src]='imageSource' class='imgzoom'/>
+    </div>
+</div>
+ 
+<div id="RevWrapper2" class="row">
+hi 
+</div>
+
+
+  `
+})
+export class DemoComponent3 {
+  imageSource = img1;      
+  imageSource1 = img1;
+  imageSource2 = img2;
+  imageSource3 = img3;
+    
+  name = 'Angular 4';
+  urls: Array<any>= [];
+   
+    
+    
+    
+    
+    
+  changeImage(event:any) {
+      debugger;
+       
+      if (event=="img1") this.imageSource=img1; 
+      if (event=="img2") this.imageSource=img2; 
+      if (event=="img3") this.imageSource=img3; 
+      console.log("this.imageSource1="+this.imageSource1);
+  }
+ 
+    
+    
+    
+ onSelectFile(event) {
+        debugger;    
+   //Check File API support
+    if (event.target.files && event.target.files.length>0 ) {
+        
+        var files = event.target.files; //FileList object
+        var reader;
+        for (let file of files) {
+            
+            //Only pics
+            if (!file.type.match('image')) continue;
+
+            reader = new FileReader();
+            reader.readAsDataURL(file); // read file as data url
+
+            reader.onload = (event) => { // called once readAsDataURL is completed
+              //this.url = event.target.result;
+              debugger;  
+              this.urls.push(event.target.result); 
+              this.imageSource=event.target.result;   
+            }
+            //Read the image
+            //picReader.readAsDataURL(file);
+        }
+    } else {
+        console.log("Your browser does not support File API");
+    }
+}    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+}

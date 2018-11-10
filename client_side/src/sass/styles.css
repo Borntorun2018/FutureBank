@@ -1,3 +1,10 @@
+.navbar {
+background-color: #e91e63;
+}
+
+
+
+
 .icon_website {
  color: #0080ff;
  aria-hidden: true
@@ -22,12 +29,43 @@
   border-bottom: 12px solid transparent;
 }
 
-
-
-
 .row.extra-left-padding{
   margin-left: 0px;
 }
 .row.extra-bottom-padding{
   margin-bottom: 20px;
 }
+
+
+
+
+
+https://aberezkin.github.io/ng2-image-upload/#/readme
+
+
+.customClass {
+    background-color: #dd3;
+    border-radius: 5px;
+    margin:5px;
+    width: 1000px;
+}
+
+.customClass .img-ul-upload {
+    background-color: #000 !important;
+}
+
+.customClass .img-ul-clear {
+    background-color: #B819BB !important;
+}
+
+.customClass .img-ul-drag-box-msg {
+    color: purple !important;
+}
+
+.customClass .img-ul-container {
+    background-color: #FF6CAD !important;
+}
+
+
+
+

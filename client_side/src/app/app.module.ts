@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 
+
 import { ImageUploadModule } from 'angular2-image-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -61,6 +62,12 @@ import { ZoomableDirective }  from './components/product/zoomable.directive.js';
 import { TokenInterceptor  } from './app.interceptor';
 
 
+import { DemoComponent3 } from './components/demo3/demo3.component';
+import { DemoComponent2 } from './components/demo2/demo2.component';
+import { DemoComponent } from './components/demo/demo.component';
+import { FileUploadComponent } from './components/fileupload/file-upload.component';
+import {FileService} from './services/fileupload/file.service';
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -86,7 +93,11 @@ export function createTranslateLoader(http: HttpClient) {
     RegistrationComponent,
     TopNavBarComponent,
     SideNavBarComponent,
-    ZoomableDirective
+    ZoomableDirective,
+    DemoComponent,
+    DemoComponent2,
+    DemoComponent3,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -96,6 +107,9 @@ export function createTranslateLoader(http: HttpClient) {
     Ng2OrderModule, 
     NgxPaginationModule,
     AngularFontAwesomeModule,
+    
+   
+    
     ImageUploadModule.forRoot(),
     NgxPermissionsModule.forRoot(),
     NgbModule.forRoot(),
@@ -117,6 +131,7 @@ export function createTranslateLoader(http: HttpClient) {
     LoggedinService,  
     TokenStorage,
     BrowserSideAuthGuard,
+    FileService,
     ServerSideAuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,
